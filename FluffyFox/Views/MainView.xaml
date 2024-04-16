@@ -1,0 +1,139 @@
+﻿<Window
+    x:Class="FluffyFox.Views.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:FluffyFox.ViewModels"
+    Title="MainWindow"
+    Width="390"
+    Height="667"
+    d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
+    AllowsTransparency="True"
+    FontFamily="/Assets/Fonts/#Inter Regular"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    WindowStyle="None"
+    mc:Ignorable="d">
+
+    <Border BorderBrush="#BABCC7" BorderThickness="0.5">
+        <Grid>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <i:InvokeCommandAction Command="{Binding DragMoveCommand}" PassEventArgsToCommand="True" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Grid
+                Grid.Row="0"
+                Margin="0,0,0,-1"
+                Background="#222429">
+
+                <StackPanel
+                    Margin="15,10,15,10"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+
+                    <TextBlock
+                        FontSize="12"
+                        Foreground="#BABCC7"
+                        Text="FluffyFox.net" />
+
+                </StackPanel>
+
+                <StackPanel
+                    Margin="0,14,15,14"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    FlowDirection="RightToLeft"
+                    Orientation="Horizontal">
+
+                    <Button Style="{StaticResource DefaultButton}">
+
+                        <Image
+                            x:Name="CloseIcon"
+                            Width="15"
+                            Height="15"
+                            Source="{StaticResource CloseIcon}" />
+
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CloseIcon" Storyboard.TargetProperty="Source">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HoverCloseIcon}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="CloseIcon" Storyboard.TargetProperty="Source">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource CloseIcon}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding CloseCommand}" PassEventArgsToCommand="True" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                    <Button Margin="25,0,0,0" Style="{StaticResource DefaultButton}">
+
+                        <Image
+                            x:Name="MinimizeIcon"
+                            Width="15"
+                            Height="15"
+                            Source="{StaticResource MinimizeIcon}" />
+
+                        <Button.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MinimizeIcon" Storyboard.TargetProperty="Source">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource HoverMinimizeIcon}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="MinimizeIcon" Storyboard.TargetProperty="Source">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource MinimizeIcon}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Button.Triggers>
+
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Click">
+                                <i:InvokeCommandAction Command="{Binding MinimizeCommand}" PassEventArgsToCommand="True" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </Button>
+
+                </StackPanel>
+
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <ContentControl Content="{Binding CurrentViewModel}" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

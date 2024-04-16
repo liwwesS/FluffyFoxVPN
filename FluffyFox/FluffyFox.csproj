@@ -1,0 +1,41 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\Fonts\Inter-Bold.otf" />
+      <None Remove="Assets\Fonts\Inter-ExtraBold.otf" />
+      <None Remove="Assets\Fonts\Inter-Medium.otf" />
+      <None Remove="Assets\Fonts\Inter-Regular.otf" />
+      <None Remove="Assets\Fonts\Inter-SemiBold.otf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignThemes" Version="5.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+      <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.77" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Resource Include="Assets\Fonts\Inter-Bold.otf" />
+      <Resource Include="Assets\Fonts\Inter-ExtraBold.otf" />
+      <Resource Include="Assets\Fonts\Inter-Medium.otf" />
+      <Resource Include="Assets\Fonts\Inter-Regular.otf" />
+      <Resource Include="Assets\Fonts\Inter-SemiBold.otf" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Update="Views\MainView.xaml">
+        <Generator>MSBuild:Compile</Generator>
+        <XamlRuntime>Wpf</XamlRuntime>
+        <SubType>Designer</SubType>
+      </Page>
+    </ItemGroup>
+
+</Project>

@@ -1,0 +1,44 @@
+﻿<Application
+    x:Class="FluffyFox.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:view="clr-namespace:FluffyFox.Views"
+    xmlns:viewmodel="clr-namespace:FluffyFox.ViewModels">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Assets/Icons/Icons.xaml" />
+                <ResourceDictionary Source="Assets/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <DataTemplate DataType="{x:Type viewmodel:AuthorizeViewModel}">
+                <view:AuthorizeView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:LoginKeyViewModel}">
+                <view:LoginKeyView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:RecoveryKeyViewModel}">
+                <view:RecoverKeyView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:HomeViewModel}">
+                <view:HomeView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:PremiumViewModel}">
+                <view:PremiumView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:SettingsViewModel}">
+                <view:SettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewmodel:UserSettingsViewModel}">
+                <view:UserSettingsView />
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,154 @@
+﻿<UserControl
+    x:Class="FluffyFox.Views.PremiumView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:FluffyFox.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:PremiumViewModel}"
+    d:DesignHeight="623"
+    d:DesignWidth="390"
+    FontFamily="/Assets/Fonts/#Inter Medium"
+    mc:Ignorable="d">
+
+    <Grid Background="#1A1C1F">
+        <StackPanel Margin="23,18,23,36">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <TextBlock
+                        Width="230"
+                        HorizontalAlignment="Left"
+                        FontFamily="/Assets/Fonts/#Inter Semi Bold"
+                        FontSize="24"
+                        Foreground="#BABCC7"
+                        Text="Преимущества премиум подписки"
+                        TextWrapping="Wrap" />
+
+                    <Button
+                        Margin="0,9,0,0"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Top"
+                        Command="{Binding NavigateBackCommand}"
+                        Style="{StaticResource DefaultButton}">
+
+                        <Image Source="{StaticResource GrayCloseIcon}" />
+                    </Button>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <StackPanel>
+                        <StackPanel Margin="0,45,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="30"
+                                Height="30"
+                                Source="{StaticResource SpeedIcon}" />
+
+                            <TextBlock
+                                Margin="17,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="#BABCC7"
+                                Text="Неограниченная скорость" />
+                        </StackPanel>
+
+                        <Separator
+                            Margin="0,18,0,0"
+                            Foreground="#BABCC7"
+                            Opacity="0.4" />
+
+                        <StackPanel Margin="0,25,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="30"
+                                Height="25"
+                                Source="{StaticResource GlobeIcon}" />
+
+                            <TextBlock
+                                Margin="17,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="#BABCC7"
+                                Text="Большой выбор регионов" />
+                        </StackPanel>
+
+                        <Separator
+                            Margin="0,18,0,0"
+                            Foreground="#BABCC7"
+                            Opacity="0.4" />
+
+                        <StackPanel Margin="0,25,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="30"
+                                Height="25"
+                                Source="{StaticResource AdBlockIcon}" />
+
+                            <TextBlock
+                                Margin="17,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="#BABCC7"
+                                Text="Отсутствие рекламы" />
+                        </StackPanel>
+
+                        <Separator
+                            Margin="0,18,0,0"
+                            Foreground="#BABCC7"
+                            Opacity="0.4" />
+
+                        <StackPanel Margin="0,25,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="30"
+                                Height="30"
+                                Source="{StaticResource FastConnectionIcon}" />
+
+                            <TextBlock
+                                Margin="17,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="#BABCC7"
+                                Text="Более быстрое подключение" />
+                        </StackPanel>
+
+                        <Separator
+                            Margin="0,18,0,0"
+                            Foreground="#BABCC7"
+                            Opacity="0.4" />
+
+                        <StackPanel Margin="0,25,0,0" Orientation="Horizontal">
+                            <Image
+                                Width="30"
+                                Height="30"
+                                Source="{StaticResource CrownIcon}" />
+
+                            <TextBlock
+                                Margin="17,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                Foreground="#BABCC7"
+                                Text="Уважение в техникуме" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="2">
+                    <Button
+                        Width="250"
+                        Height="49"
+                        Margin="0,100,0,0"
+                        Command="{Binding OpenLinkCommand}"
+                        CommandParameter="http://www.google.com/"
+                        Content="К тарифам"
+                        FontFamily="/Assets/Fonts/#Inter Regular"
+                        FontSize="12"
+                        Foreground="#2E3136"
+                        Style="{StaticResource RoundOrangeButton}" />
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

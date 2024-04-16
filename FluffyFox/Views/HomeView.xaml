@@ -1,0 +1,252 @@
+﻿<UserControl
+    x:Class="FluffyFox.Views.HomeView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:FluffyFox.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:HomeViewModel}"
+    d:DesignHeight="623"
+    d:DesignWidth="390"
+    FontFamily="/Assets/Fonts/#Inter Medium"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="#2E3136">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="250" />
+        </Grid.RowDefinitions>
+
+        <Button
+            Height="20"
+            Margin="20,0,0,0"
+            HorizontalAlignment="Left"
+            Style="{StaticResource DefaultButton}">
+
+            <Image
+                Width="20"
+                Height="20"
+                Source="{StaticResource NotificationIcon}" />
+
+        </Button>
+
+        <materialDesign:PopupBox
+            Margin="0,0,10,0"
+            HorizontalAlignment="Right"
+            Foreground="#BABCC7"
+            PlacementMode="BottomAndAlignRightEdges"
+            StaysOpen="False">
+
+            <Border Background="#212429" CornerRadius="10">
+                <StackPanel>
+                    <Button
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Command="{Binding NavigatePremiumCommand}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Width="20"
+                                Height="20"
+                                Margin="0,0,7,0"
+                                Source="{StaticResource PremiumIcon}" />
+
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/Assets/Fonts/#Inter Regular"
+                                FontSize="10"
+                                Foreground="#BABCC7"
+                                Text="Премиум" />
+                        </Grid>
+                    </Button>
+
+                    <Button
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Command="{Binding NavigateSettingsCommand}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Width="20"
+                                Height="20"
+                                Margin="0,0,7,0"
+                                Source="{StaticResource SettingsIcon}" />
+
+                            <TextBlock
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                FontFamily="/Assets/Fonts/#Inter Regular"
+                                FontSize="10"
+                                Foreground="#BABCC7"
+                                Text="Настройки" />
+                        </Grid>
+                    </Button>
+                </StackPanel>
+            </Border>
+
+        </materialDesign:PopupBox>
+
+        <Grid Grid.Row="1">
+            <Image
+                x:Name="grayFoxIcon"
+                Width="80"
+                Height="80"
+                Margin="0"
+                Opacity="0.25"
+                Source="{StaticResource GrayFoxIcon}" />
+
+            <Ellipse
+                x:Name="circle1"
+                Width="165"
+                Height="165"
+                Opacity="0.2"
+                Stroke="#BABCC7"
+                StrokeThickness="1" />
+
+            <Ellipse
+                x:Name="circle2"
+                Width="240"
+                Height="240"
+                Opacity="0.15"
+                Stroke="#BABCC7"
+                StrokeThickness="1" />
+
+            <Ellipse
+                x:Name="circle3"
+                Width="310"
+                Height="310"
+                Opacity="0.1"
+                Stroke="#BABCC7"
+                StrokeThickness="1" />
+        </Grid>
+
+        <Border
+            Grid.Row="2"
+            Height="160"
+            Margin="18"
+            VerticalAlignment="Bottom"
+            Background="#212429"
+            CornerRadius="15">
+
+            <Grid Background="Transparent">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="1">
+                    <StackPanel
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+
+                        <ToggleButton Style="{StaticResource ConnectButton}">
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard x:Name="AnimationStoryboard">
+                                        <Storyboard x:Name="MyStoryBoard">
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grayFoxIcon" Storyboard.TargetProperty="Source">
+                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource OrangeFoxIcon}" />
+                                            </ObjectAnimationUsingKeyFrames>
+
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="grayFoxIcon"
+                                                Storyboard.TargetProperty="Opacity"
+                                                To="1"
+                                                Duration="0:0:1.5" />
+
+                                            <ColorAnimation
+                                                BeginTime="0:0:0"
+                                                Storyboard.TargetName="circle1"
+                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                To="#FF7201"
+                                                Duration="0:0:1" />
+                                            <ColorAnimation
+                                                BeginTime="0:0:0.2"
+                                                Storyboard.TargetName="circle2"
+                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                To="#FF7201"
+                                                Duration="0:0:1" />
+                                            <ColorAnimation
+                                                BeginTime="0:0:0.4"
+                                                Storyboard.TargetName="circle3"
+                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                                                To="#FF7201"
+                                                Duration="0:0:1" />
+
+                                            <DoubleAnimation
+                                                AutoReverse="True"
+                                                BeginTime="0:0:0"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="circle1"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0.2"
+                                                To="0.7"
+                                                Duration="0:0:1" />
+                                            <DoubleAnimation
+                                                AutoReverse="True"
+                                                BeginTime="0:0:0.2"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="circle2"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0.15"
+                                                To="0.6"
+                                                Duration="0:0:1" />
+                                            <DoubleAnimation
+                                                AutoReverse="True"
+                                                BeginTime="0:0:0.4"
+                                                RepeatBehavior="Forever"
+                                                Storyboard.TargetName="circle3"
+                                                Storyboard.TargetProperty="Opacity"
+                                                From="0.1"
+                                                To="0.5"
+                                                Duration="0:0:1" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <StopStoryboard BeginStoryboardName="AnimationStoryboard" />
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+
+                        <Button
+                            Width="49"
+                            Height="49"
+                            Margin="10,0,0,0"
+                            Style="{StaticResource RoundOrangeButton}">
+
+                            <Button.Background>
+                                <SolidColorBrush Opacity="0.4" Color="#FF7201" />
+                            </Button.Background>
+
+                            <Image
+                                Width="25"
+                                Height="25"
+                                Source="{StaticResource GlobeIcon}" />
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

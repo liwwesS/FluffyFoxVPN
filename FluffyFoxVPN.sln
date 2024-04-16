@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluffyFox", "FluffyFox\FluffyFox.csproj", "{6C34A869-BFCE-4AD8-870D-FE5199160B51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{7974DB09-39D2-4953-AAB3-30E2CF6AC2A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C34A869-BFCE-4AD8-870D-FE5199160B51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C34A869-BFCE-4AD8-870D-FE5199160B51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C34A869-BFCE-4AD8-870D-FE5199160B51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C34A869-BFCE-4AD8-870D-FE5199160B51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7974DB09-39D2-4953-AAB3-30E2CF6AC2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7974DB09-39D2-4953-AAB3-30E2CF6AC2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7974DB09-39D2-4953-AAB3-30E2CF6AC2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7974DB09-39D2-4953-AAB3-30E2CF6AC2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

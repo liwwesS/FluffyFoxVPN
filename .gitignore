@@ -1,0 +1,9 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.idea/.idea.FluffyFoxVPN/.idea
+/.vs
+/DataAccess/obj
+/FluffyFox/bin/Debug/net8.0-windows
+/FluffyFox/obj

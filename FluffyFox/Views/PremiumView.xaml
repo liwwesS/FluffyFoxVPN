@@ -34,7 +34,7 @@
                         Margin="0,9,0,0"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
-                        Command="{Binding NavigateBackCommand}"
+                        Command="{Binding NavigateToHomeCommand}"
                         Style="{StaticResource DefaultButton}">
 
                         <Image Source="{StaticResource GrayCloseIcon}" />

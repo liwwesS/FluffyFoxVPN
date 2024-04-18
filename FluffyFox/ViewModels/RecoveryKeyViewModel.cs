@@ -1,16 +1,28 @@
-﻿using FluffyFox.Commands;
+﻿using FluffyFox.Core;
 using FluffyFox.Services;
-using System.Windows.Input;
 
 namespace FluffyFox.ViewModels
 {
-    public class RecoveryKeyViewModel : BaseViewModel
+    public class RecoveryKeyViewModel : ViewModelBase
     {
-		public ICommand NavigateLoginCommand { get; }
-
-		public RecoveryKeyViewModel(INavigationService loginNavigationService)
+		private INavigationService _navigation;
+		public INavigationService Navigation
 		{
-			NavigateLoginCommand = new NavigateCommand(loginNavigationService);
+			get => _navigation;
+			set
+			{
+				_navigation = value;
+				OnPropertyChanged();
+			}
+		}
+
+		public RelayCommand NavigateToLoginCommand { get; }
+
+		public RecoveryKeyViewModel(INavigationService navigationService)
+		{
+			Navigation = navigationService;
+
+			NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginKeyViewModel>(); }, o => true);
 		}
 	}
 }

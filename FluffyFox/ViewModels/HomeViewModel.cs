@@ -1,18 +1,48 @@
-﻿using FluffyFox.Commands;
+﻿using FluffyFox.Core;
+using FluffyFox.Helpers;
 using FluffyFox.Services;
-using System.Windows.Input;
 
 namespace FluffyFox.ViewModels
 {
-	public class HomeViewModel : BaseViewModel
+    public class HomeViewModel : ViewModelBase
 	{
-		public ICommand NavigatePremiumCommand { get; }
-		public ICommand NavigateSettingsCommand { get; }
-
-		public HomeViewModel(INavigationService premiumNavigationService, INavigationService settingsNavigationService)
+		private UserSession _userSession;
+		public UserSession UserSession
 		{
-			NavigatePremiumCommand = new NavigateCommand(premiumNavigationService);
-			NavigateSettingsCommand = new NavigateCommand(settingsNavigationService);
+			get => _userSession;
+			set
+			{
+				_userSession = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private INavigationService _navigation;
+		public INavigationService Navigation
+		{
+			get => _navigation;
+			set
+			{
+				_navigation = value;
+				OnPropertyChanged();
+			}
+		}
+
+		private readonly IUserRepository _userRepository;
+
+		public RelayCommand NavigateToPremiumCommand { get; }
+		public RelayCommand NavigateToSettingsCommand { get; }
+		public RelayCommand NavigateToLocationCommand { get; }
+
+		public HomeViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository)
+		{
+			Navigation = navigationService;
+			UserSession = userSession;
+			_userRepository = userRepository;
+
+			NavigateToPremiumCommand = new RelayCommand(o => { Navigation.NavigateTo<PremiumViewModel>(); }, o => true);
+			NavigateToSettingsCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
+			NavigateToLocationCommand = new RelayCommand(o => { Navigation.NavigateTo<LocationViewModel>(); }, o => true);
 		}
 	}
 }

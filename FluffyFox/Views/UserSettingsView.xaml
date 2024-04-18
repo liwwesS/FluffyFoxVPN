@@ -29,7 +29,7 @@
                     Margin="-10,0,15,0"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Command="{Binding NavigateSettingsCommand}"
+                    Command="{Binding NavigateToSettingsCommand}"
                     Style="{StaticResource DefaultButton}">
 
                     <Image Source="{StaticResource LessThanIcon}" />

@@ -23,6 +23,11 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+      <ProjectReference Include="..\FluffyFox.Library\FluffyFox.Library.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
       <Resource Include="Assets\Fonts\Inter-Bold.otf" />
       <Resource Include="Assets\Fonts\Inter-ExtraBold.otf" />
       <Resource Include="Assets\Fonts\Inter-Medium.otf" />

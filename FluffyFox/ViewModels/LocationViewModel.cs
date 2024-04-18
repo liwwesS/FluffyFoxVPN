@@ -3,8 +3,8 @@ using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
 {
-    public class UserSettingsViewModel : ViewModelBase
-    {
+    public class LocationViewModel : ViewModelBase
+	{
 		private INavigationService _navigation;
 		public INavigationService Navigation
 		{
@@ -16,12 +16,12 @@ namespace FluffyFox.ViewModels
 			}
 		}
 
-		public RelayCommand NavigateToSettingsCommand { get; }
+		public RelayCommand NavigateToHomeCommand { get; }
 
-		public UserSettingsViewModel(INavigationService navigationService)
+		public LocationViewModel(INavigationService navigationService)
 		{
 			Navigation = navigationService;
-			NavigateToSettingsCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
+			NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
 		}
 	}
 }

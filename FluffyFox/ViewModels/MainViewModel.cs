@@ -1,32 +1,35 @@
 ﻿using FluffyFox.Commands;
-using FluffyFox.Stores;
+using FluffyFox.Core;
+using FluffyFox.Services;
 using System.Windows.Input;
 
 namespace FluffyFox.ViewModels
 {
-	public class MainViewModel : BaseViewModel
+	public class MainViewModel : ViewModelBase
 	{
-		private readonly NavigationStore _navigationStore;
-
-		public BaseViewModel CurrentViewModel => _navigationStore.CurrentViewModel;
+		private INavigationService _navigation;
+		public INavigationService Navigation
+		{
+			get => _navigation;
+			set
+			{
+				_navigation = value;
+				OnPropertyChanged();
+			}
+		}
 
 		public ICommand DragMoveCommand { get; }
 		public ICommand CloseCommand { get; }
 		public ICommand MinimizeCommand { get; }
 
-		public MainViewModel(NavigationStore navigationStore)
+		public MainViewModel(INavigationService navigationService)
 		{
 			DragMoveCommand = new DragMoveCommand();
 			CloseCommand = new CloseCommand();
 			MinimizeCommand = new MinimizeCommand();
 
-			_navigationStore = navigationStore;
-			_navigationStore.CurrentViewModelChanged += OnCurrentViewModelChanged;
-		}
-
-		private void OnCurrentViewModelChanged()
-		{
-			OnPropertyChanged(nameof(CurrentViewModel));
+			Navigation = navigationService;
+			Navigation.NavigateTo<AuthorizeViewModel>();
 		}
 	}
 }

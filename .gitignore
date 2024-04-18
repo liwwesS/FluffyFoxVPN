@@ -7,3 +7,7 @@
 /DataAccess/obj
 /FluffyFox/bin/Debug/net8.0-windows
 /FluffyFox/obj
+DataAccess/bin
+ObservableObject/obj
+FluffyFox.Library/bin
+FluffyFox.Library/obj

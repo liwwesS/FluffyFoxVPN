@@ -30,7 +30,7 @@
             <Button
                 Margin="0,17,0,0"
                 HorizontalAlignment="Left"
-                Command="{Binding NavigateLoginCommand}"
+                Command="{Binding NavigateToLoginCommand}"
                 Content="Отменить"
                 Style="{StaticResource NoBackgroundButton}" />
 
@@ -90,14 +90,8 @@
                 Width="344"
                 Height="49"
                 Margin="0,18,0,0"
-                Content="Войти"
+                Content="Отправить"
                 Style="{StaticResource RoundOrangeButton}" />
-
-            <Button
-                Margin="0,16,0,0"
-                HorizontalAlignment="Center"
-                Content="Авторизация"
-                Style="{StaticResource NoBackgroundButton}" />
         </StackPanel>
     </Grid>
 </UserControl>

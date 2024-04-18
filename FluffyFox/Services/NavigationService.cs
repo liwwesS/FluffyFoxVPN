@@ -1,22 +1,40 @@
-﻿using FluffyFox.Stores;
-using FluffyFox.ViewModels;
+﻿using FluffyFox.Core;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace FluffyFox.Services
 {
-    public class NavigationService<TViewModel> : INavigationService where TViewModel : BaseViewModel
+	public class NavigationService : INotifyPropertyChanged, INavigationService
 	{
-		private readonly NavigationStore _navigationStore;
-		private readonly Func<TViewModel> _createViewModel;
+		public Func<Type, ViewModelBase> _viewModelFactory { get; }
+		private ViewModelBase _currentView;
 
-		public NavigationService(NavigationStore navigationStore, Func<TViewModel> createViewModel)
+		public ViewModelBase CurrentView
 		{
-			_navigationStore = navigationStore;
-			_createViewModel = createViewModel;
+			get => _currentView;
+			private set 
+			{
+				_currentView = value;
+				OnPropertyChanged();
+			}
 		}
 
-		public void Navigate()
+		public NavigationService(Func<Type, ViewModelBase> viewModelFactory)
         {
-			_navigationStore.CurrentViewModel = _createViewModel();
+			_viewModelFactory = viewModelFactory;
 		}
-    }
+
+        public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
+		{
+			ViewModelBase viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+			CurrentView = viewModel;
+		}
+
+		public event PropertyChangedEventHandler? PropertyChanged;
+
+		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+		{
+			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
 }

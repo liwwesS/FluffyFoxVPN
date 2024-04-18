@@ -132,7 +132,7 @@
             </Grid>
 
             <Grid Grid.Row="1">
-                <ContentControl Content="{Binding CurrentViewModel}" />
+                <ContentControl Content="{Binding Path=Navigation.CurrentView}" />
             </Grid>
         </Grid>
     </Border>

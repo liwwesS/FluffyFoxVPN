@@ -52,7 +52,7 @@
                     <Button
                         Background="Transparent"
                         BorderThickness="0"
-                        Command="{Binding NavigatePremiumCommand}">
+                        Command="{Binding NavigateToPremiumCommand}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -78,7 +78,7 @@
                     <Button
                         Background="Transparent"
                         BorderThickness="0"
-                        Command="{Binding NavigateSettingsCommand}">
+                        Command="{Binding NavigateToSettingsCommand}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -233,6 +233,7 @@
                             Width="49"
                             Height="49"
                             Margin="10,0,0,0"
+                            Command="{Binding NavigateToLocationCommand}"
                             Style="{StaticResource RoundOrangeButton}">
 
                             <Button.Background>

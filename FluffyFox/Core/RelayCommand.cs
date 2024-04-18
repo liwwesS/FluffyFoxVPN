@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace FluffyFox.Commands;
+namespace FluffyFox.Core;
 
 public class RelayCommand<T> : ICommand
 {
@@ -48,19 +48,19 @@ public class RelayCommand : ICommand
         _execute = execute;
     }
 
-    private RelayCommand(Action<object> execute, Predicate<object> canExecute)
+    public RelayCommand(Action<object> execute, Predicate<object> canExecute)
     {
         ArgumentNullException.ThrowIfNull(execute);
         _execute = execute;
         _canExecute = canExecute;
     }
 
-    public bool CanExecute(object parameter)
-    {
-        return _canExecute == null || _canExecute(parameter);
-    }
+	public bool CanExecute(object parameter)
+	{
+		return _canExecute == null || _canExecute(parameter);
+	}
 
-    public void Execute(object parameter)
+	public void Execute(object parameter)
     {
         _execute(parameter);
     }

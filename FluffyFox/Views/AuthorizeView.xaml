@@ -41,14 +41,14 @@
             <Button
                 Width="308"
                 Margin="0,40,0,0"
-                Command="{Binding NavigateHomeCommand}"
+                Command="{Binding NavigateToHomeCommand}"
                 Content="Я новый пользователь"
                 Style="{StaticResource RoundOrangeButton}" />
 
             <Button
                 Width="308"
                 Margin="0,18,0,0"
-                Command="{Binding NavigateLoginCommand}"
+                Command="{Binding NavigateToLoginCommand}"
                 Content="Войти с помощью ключа"
                 Style="{StaticResource RoundOrangeTransparentButton}" />
 

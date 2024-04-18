@@ -1,12 +1,325 @@
-﻿<UserControl x:Class="FluffyFox.Views.LocationView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FluffyFox.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+﻿<UserControl
+    x:Class="FluffyFox.Views.LocationView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="clr-namespace:FluffyFox.ViewModels"
+    d:DataContext="{d:DesignInstance Type=viewmodels:LocationViewModel}"
+    d:DesignHeight="623"
+    d:DesignWidth="390"
+    FontFamily="/Assets/Fonts/#Inter Medium"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.TextBox.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Background="#1A1C1F">
+
+        <Grid Margin="22,18,22,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Button
+                            Width="40"
+                            Height="40"
+                            Margin="-10,0,15,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Command="{Binding NavigateToHomeCommand}"
+                            Style="{StaticResource DefaultButton}">
+
+                            <Image Source="{StaticResource LessThanIcon}" />
+                        </Button>
+
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontFamily="/Assets/Fonts/#Inter Semi Bold"
+                            FontSize="24"
+                            Foreground="#BABCC7"
+                            Text="Локации" />
+                    </StackPanel>
+
+                    <Border
+                        Width="344"
+                        Height="54"
+                        Margin="0,17,0,0"
+                        Style="{StaticResource BorderStyle}">
+
+                        <Grid Height="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="51" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <materialDesign:PackIcon
+                                Grid.Column="0"
+                                Width="25"
+                                Height="25"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="#BABCC7"
+                                Kind="Search"
+                                Opacity="0.7" />
+
+                            <TextBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Foreground="#BABCC7"
+                                materialDesign:HintAssist.Hint="Поиск региона"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{x:Null}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CaretBrush="#fcfefe"
+                                FontFamily="/Assets/Fonts/#Inter Semi Bold"
+                                FontSize="13"
+                                Foreground="#BABCC7"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                TextAlignment="Left" />
+                        </Grid>
+                    </Border>
+
+                    <StackPanel Margin="0,17,0,0">
+                        <TextBlock
+                            FontSize="14"
+                            Foreground="#BABCC7"
+                            Text="Бесплатные регионы" />
+
+                        <Grid Margin="0,20,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="52" />
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Grid Grid.Column="0">
+                                <Image
+                                    Width="42"
+                                    Height="42"
+                                    Source="{StaticResource RussiaIcon}" />
+                            </Grid>
+
+                            <Grid Grid.Column="1" Margin="10,0,0,0">
+                                <StackPanel VerticalAlignment="Center">
+                                    <TextBlock
+                                        FontSize="15"
+                                        Foreground="#BABCC7"
+                                        Text="Россия" />
+                                    <TextBlock
+                                        Margin="0,2,0,0"
+                                        FontSize="13"
+                                        Foreground="#BABCC7"
+                                        Opacity="0.7"
+                                        Text="Екатеринбург" />
+                                </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="2">
+                                <StackPanel
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Center"
+                                    Orientation="Horizontal">
+
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="42 ping" />
+
+                                    <ToggleButton
+                                        Width="20"
+                                        Margin="15,0,0,0"
+                                        Style="{StaticResource FavouriteButton}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock
+                    Grid.Row="0"
+                    Margin="0,23,0,0"
+                    FontSize="14"
+                    Foreground="#BABCC7"
+                    Text="Премиум регионы" />
+
+                <StackPanel
+                    Grid.Row="1"
+                    Margin="0,20,0,0"
+                    Opacity="0.4">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image
+                                Width="45"
+                                Height="45"
+                                Source="{StaticResource GermanyIcon}" />
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="15"
+                                    Foreground="#BABCC7"
+                                    Text="Германия" />
+                                <TextBlock
+                                    Margin="0,2,0,0"
+                                    FontSize="13"
+                                    Foreground="#BABCC7"
+                                    Opacity="0.7"
+                                    Text="Берлин" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="13"
+                                    Foreground="#FF7201"
+                                    Text="29 ping" />
+
+                                <Image
+                                    Width="19"
+                                    Height="19"
+                                    Margin="15,0,0,0"
+                                    Source="{StaticResource LockIcon}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image
+                                Width="45"
+                                Height="45"
+                                Source="{StaticResource FranceIcon}" />
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="15"
+                                    Foreground="#BABCC7"
+                                    Text="Франция" />
+                                <TextBlock
+                                    Margin="0,2,0,0"
+                                    FontSize="13"
+                                    Foreground="#BABCC7"
+                                    Opacity="0.7"
+                                    Text="Лимож" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="13"
+                                    Foreground="#FF7201"
+                                    Text="87 ping" />
+
+                                <Image
+                                    Width="19"
+                                    Height="19"
+                                    Margin="15,0,0,0"
+                                    Source="{StaticResource LockIcon}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="52" />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid Grid.Column="0">
+                            <Image
+                                Width="45"
+                                Height="45"
+                                Source="{StaticResource CanadaIcon}" />
+                        </Grid>
+
+                        <Grid Grid.Column="1" Margin="10,0,0,0">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock
+                                    FontSize="15"
+                                    Foreground="#BABCC7"
+                                    Text="Канада " />
+                                <TextBlock
+                                    Margin="0,2,0,0"
+                                    FontSize="13"
+                                    Foreground="#BABCC7"
+                                    Opacity="0.7"
+                                    Text="Оттава" />
+                            </StackPanel>
+                        </Grid>
+
+                        <Grid Grid.Column="2">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="13"
+                                    Foreground="#FF7201"
+                                    Text="42 ping" />
+
+                                <Image
+                                    Width="19"
+                                    Height="19"
+                                    Margin="15,0,0,0"
+                                    Source="{StaticResource LockIcon}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

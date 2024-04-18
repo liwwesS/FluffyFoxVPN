@@ -30,7 +30,7 @@
             <Button
                 Margin="0,17,0,0"
                 HorizontalAlignment="Left"
-                Command="{Binding NavigateHomeCommand}"
+                Command="{Binding NavigateToAuthorizeCommand}"
                 Content="Отменить"
                 Style="{StaticResource NoBackgroundButton}" />
 
@@ -82,6 +82,7 @@
                         FontSize="14"
                         Foreground="#BABCC7"
                         Style="{StaticResource MaterialDesignTextBox}"
+                        Text="{Binding EnteredKey}"
                         TextAlignment="Left" />
                 </Grid>
             </Border>
@@ -90,13 +91,14 @@
                 Width="344"
                 Height="49"
                 Margin="0,18,0,0"
+                Command="{Binding NavigateToHomeCommand}"
                 Content="Войти"
                 Style="{StaticResource RoundOrangeButton}" />
 
             <Button
                 Margin="0,16,0,0"
                 HorizontalAlignment="Center"
-                Command="{Binding NavigateRecoveryCommand}"
+                Command="{Binding NavigateToRecoveryCommand}"
                 Content="Восстановить ключ"
                 Style="{StaticResource NoBackgroundButton}" />
         </StackPanel>

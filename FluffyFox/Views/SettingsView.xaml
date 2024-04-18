@@ -27,7 +27,7 @@
                         Margin="-10,0,15,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Command="{Binding NavigateHomeCommand}"
+                        Command="{Binding NavigateToHomeCommand}"
                         Style="{StaticResource DefaultButton}">
 
                         <Image Source="{StaticResource LessThanIcon}" />
@@ -102,7 +102,7 @@
                 <StackPanel>
                     <Button
                         Margin="0,20,0,0"
-                        Command="{Binding NavigatePremiumCommand}"
+                        Command="{Binding NavigateToPremiumCommand}"
                         Content="Премиум"
                         Style="{StaticResource SettingsButton}"
                         Tag="{StaticResource PremiumIcon}" />
@@ -110,7 +110,7 @@
                     <Separator Foreground="#BABCC7" Opacity="0.4" />
 
                     <Button
-                        Command="{Binding NavigateUserSettingsCommand}"
+                        Command="{Binding NavigateToUserSettingsCommand}"
                         Content="Настройки аккаунта"
                         Style="{StaticResource SettingsButton}"
                         Tag="{StaticResource UserIcon}" />
@@ -135,7 +135,7 @@
                 <StackPanel VerticalAlignment="Bottom">
 
                     <Button
-                        Command="{Binding NavigateAuthorizeCommand}"
+                        Command="{Binding NavigateToAuthorizeCommand}"
                         Content="ВЫЙТИ"
                         Style="{StaticResource ExitButton}" />
 

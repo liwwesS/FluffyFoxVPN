@@ -1,10 +1,10 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.ViewModels;
 
 namespace FluffyFox.Services
 {
-	public interface INavigationService
+    public interface INavigationService
 	{
 		ViewModelBase CurrentView { get; }
-		void NavigateTo<T>() where T : ViewModelBase;
+		void NavigateTo<TViewModel>() where TViewModel : ViewModelBase;
 	}
 }

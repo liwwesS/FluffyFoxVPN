@@ -1,5 +1,4 @@
 ﻿using DataAccess;
-using FluffyFox.Core;
 using FluffyFox.Helpers;
 using FluffyFox.Services;
 using FluffyFox.ViewModels;
@@ -25,14 +24,14 @@ public partial class App : Application
 		services.AddDbContext<FluffyDbContext>();
 	
 		services.AddSingleton<MainViewModel>();
-		services.AddSingleton<AuthorizeViewModel>();
-		services.AddSingleton<LoginKeyViewModel>();
-		services.AddSingleton<RecoveryKeyViewModel>();
-		services.AddSingleton<HomeViewModel>();
-		services.AddSingleton<LocationViewModel>();
-		services.AddSingleton<PremiumViewModel>();
-		services.AddSingleton<SettingsViewModel>();
-		services.AddSingleton<UserSettingsViewModel>();
+		services.AddTransient<AuthorizeViewModel>();
+		services.AddTransient<LoginKeyViewModel>();
+		services.AddTransient<RecoveryKeyViewModel>();
+		services.AddTransient<HomeViewModel>();
+		services.AddTransient<LocationViewModel>();
+		services.AddTransient<PremiumViewModel>();
+		services.AddTransient<SettingsViewModel>();
+		services.AddTransient<UserSettingsViewModel>();
 
 		services.AddSingleton<Func<Type, ViewModelBase>>(serviceProvider => viewModelType => (ViewModelBase)serviceProvider.GetRequiredService(viewModelType));
 		services.AddSingleton<INavigationService, NavigationService>();

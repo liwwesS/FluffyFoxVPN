@@ -1,4 +1,4 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.Commands;
 using FluffyFox.Helpers;
 using FluffyFox.Services;
 using System.Windows;
@@ -14,7 +14,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_enteredKey = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(EnteredKey));
 			}
 		}
 
@@ -25,7 +25,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(UserSession));
 			}
 		}
 
@@ -36,11 +36,20 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(Navigation));
 			}
 		}
 
-		private readonly IUserRepository _userRepository;
+		private IUserRepository _userRepository;
+		public IUserRepository UserRepository
+		{
+			get => _userRepository;
+			set
+			{
+				_userRepository = value;
+				OnPropertyChanged(nameof(UserRepository));
+			}
+		}
 
 		public RelayCommand NavigateToAuthorizeCommand { get; }
 		public RelayCommand NavigateToRecoveryCommand { get; }
@@ -50,7 +59,7 @@ namespace FluffyFox.ViewModels
         {
 			Navigation = navigationService;
 			UserSession = userSession;
-			_userRepository = userRepository;
+			UserRepository = userRepository;
 
 			NavigateToAuthorizeCommand = new RelayCommand(o => { Navigation.NavigateTo<AuthorizeViewModel>(); }, o => true);
 			NavigateToRecoveryCommand = new RelayCommand(o => { Navigation.NavigateTo<RecoveryKeyViewModel>(); }, o => true);

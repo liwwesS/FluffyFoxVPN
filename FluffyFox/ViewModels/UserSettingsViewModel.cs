@@ -1,4 +1,4 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.Commands;
 using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels

@@ -28,7 +28,7 @@ namespace DataAccess.Entities
 		public string? Token { get; set; }
 
 		[Column("tarif")]
-		public ObservableCollection<Tarrifs>? Tariff { get; set; } = new();
+		public ObservableCollection<Tarrifs>? Tariff { get; set; } = [];
 
 		[Column("email")]
 		[MaxLength(126)]

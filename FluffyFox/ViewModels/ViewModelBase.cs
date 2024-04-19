@@ -1,6 +1,6 @@
 using FluffyFox.Library;
 
-namespace FluffyFox.Core;
+namespace FluffyFox.ViewModels;
 
 public abstract class ViewModelBase : ObservableObject
 {

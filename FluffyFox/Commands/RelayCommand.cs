@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace FluffyFox.Core;
+namespace FluffyFox.Commands;
 
 public class RelayCommand<T> : ICommand
 {

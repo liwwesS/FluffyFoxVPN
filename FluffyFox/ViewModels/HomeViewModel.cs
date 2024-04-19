@@ -1,4 +1,4 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.Commands;
 using FluffyFox.Helpers;
 using FluffyFox.Services;
 
@@ -13,7 +13,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(UserSession));
 			}
 		}
 
@@ -24,11 +24,20 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(Navigation));
 			}
 		}
 
-		private readonly IUserRepository _userRepository;
+		private IUserRepository _userRepository;
+		public IUserRepository UserRepository
+		{
+			get => _userRepository;
+			set
+			{
+				_userRepository = value;
+				OnPropertyChanged(nameof(UserRepository));
+			}
+		}
 
 		public RelayCommand NavigateToPremiumCommand { get; }
 		public RelayCommand NavigateToSettingsCommand { get; }
@@ -38,7 +47,7 @@ namespace FluffyFox.ViewModels
 		{
 			Navigation = navigationService;
 			UserSession = userSession;
-			_userRepository = userRepository;
+			UserRepository = userRepository;
 
 			NavigateToPremiumCommand = new RelayCommand(o => { Navigation.NavigateTo<PremiumViewModel>(); }, o => true);
 			NavigateToSettingsCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);

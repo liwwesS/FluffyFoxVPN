@@ -1,4 +1,4 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.Commands;
 using FluffyFox.Services;
 using System.Diagnostics;
 using System.Windows.Input;

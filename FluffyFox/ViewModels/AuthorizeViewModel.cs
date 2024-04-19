@@ -1,10 +1,10 @@
-﻿using FluffyFox.Core;
+﻿using FluffyFox.Commands;
 using FluffyFox.Helpers;
 using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
 {
-	public class AuthorizeViewModel : ViewModelBase
+    public class AuthorizeViewModel : ViewModelBase
 	{
 		private UserSession _userSession;
 		public UserSession UserSession
@@ -13,7 +13,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(UserSession));
 			}
 		}
 
@@ -24,11 +24,20 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged();
+				OnPropertyChanged(nameof(UserSession));
 			}
 		}
 
-		private readonly IUserRepository _userRepository;
+		private IUserRepository _userRepository;
+		public IUserRepository UserRepository
+		{
+			get => _userRepository;
+			set
+			{
+				_userRepository = value;
+				OnPropertyChanged(nameof(UserSession));
+			}
+		}
 
 		public RelayCommand NavigateToLoginCommand { get; set; }
 		public RelayCommand NavigateToHomeCommand { get; set; }
@@ -37,7 +46,7 @@ namespace FluffyFox.ViewModels
 		{
 			Navigation = navigationService;
 			UserSession = userSession;
-			_userRepository = userRepository;
+			UserRepository = userRepository;
 
 			NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginKeyViewModel>(); }, o => true);
 			NavigateToHomeCommand = new RelayCommand(Execute, o => true);
@@ -50,14 +59,14 @@ namespace FluffyFox.ViewModels
 
 		private async Task NavigateAndAddUserAsync()
 		{
-			var key = await _userRepository.GenerateUniqueKeyAsync();
-			var isUnique = await _userRepository.IsKeyUniqueAsync(key);
+			var key = await UserRepository.GenerateUniqueKeyAsync();
+			var isUnique = await UserRepository.IsKeyUniqueAsync(key);
 
 			if (isUnique)
 			{
-				await _userRepository.AddUserAsync(key);
+				await UserRepository.AddUserAsync(key);
 
-				UserSession.CurrentUser = await _userRepository.GetUserByKeyAsync(key);
+				UserSession.CurrentUser = await UserRepository.GetUserByKeyAsync(key);
 				Navigation.NavigateTo<HomeViewModel>();
 			}
 		}

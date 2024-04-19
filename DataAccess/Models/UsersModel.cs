@@ -54,7 +54,7 @@ namespace DataAccess.Models
 				Key = user.Key,
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
-				Tariff = user.Tariff != null ? new ObservableCollection<TariffsModel>(user.Tariff.ToList().Select(TariffsModel.ToTariffModelMap)) : new ObservableCollection<TariffsModel>(),
+				Tariff = user.Tariff != null ? new ObservableCollection<TariffsModel>(user.Tariff.ToList().Select(TariffsModel.ToTariffModelMap)) : [],
 				Email = user.Email ?? null
 			};
 		}
@@ -68,7 +68,7 @@ namespace DataAccess.Models
 				Key = user.Key,
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
-				Tariff = user.Tariff != null ? new ObservableCollection<Tarrifs>(user.Tariff.ToList().Select(TariffsModel.ToTariffMap)) : new ObservableCollection<Tarrifs>(),
+				Tariff = user.Tariff != null ? new ObservableCollection<Tarrifs>(user.Tariff.ToList().Select(TariffsModel.ToTariffMap)) : [],
 				Email = user.Email ?? null
 			};
 		}

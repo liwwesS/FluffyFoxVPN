@@ -1,14 +1,13 @@
-﻿using FluffyFox.Core;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
+﻿using FluffyFox.Library;
+using FluffyFox.ViewModels;
 
 namespace FluffyFox.Services
 {
-	public class NavigationService : INotifyPropertyChanged, INavigationService
+    public class NavigationService : ObservableObject, INavigationService
 	{
 		public Func<Type, ViewModelBase> _viewModelFactory { get; }
-		private ViewModelBase _currentView;
 
+		private ViewModelBase _currentView;
 		public ViewModelBase CurrentView
 		{
 			get => _currentView;
@@ -28,13 +27,6 @@ namespace FluffyFox.Services
 		{
 			ViewModelBase viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
 			CurrentView = viewModel;
-		}
-
-		public event PropertyChangedEventHandler? PropertyChanged;
-
-		protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 		}
 	}
 }

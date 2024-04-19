@@ -1,11 +1,10 @@
 ﻿using FluffyFox.Commands;
-using FluffyFox.Core;
 using FluffyFox.Services;
 using System.Windows.Input;
 
 namespace FluffyFox.ViewModels
 {
-	public class MainViewModel : ViewModelBase
+    public class MainViewModel : ViewModelBase
 	{
 		private INavigationService _navigation;
 		public INavigationService Navigation

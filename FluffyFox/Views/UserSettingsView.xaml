@@ -44,7 +44,7 @@
             </StackPanel>
 
             <TextBlock
-                Margin="0,23,0,0"
+                Margin="2,23,0,0"
                 Foreground="#BABCC7"
                 Opacity="0.7"
                 Text="Привязка эл. почты" />

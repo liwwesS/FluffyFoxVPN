@@ -3,6 +3,7 @@ using FluffyFox.Helpers;
 using FluffyFox.Services;
 using System.Diagnostics;
 using System.Windows.Input;
+using FluffyFox.Repositories;
 
 namespace FluffyFox.ViewModels
 {
@@ -79,7 +80,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged(nameof(Navigation));
+				OnPropertyChanged();
 			}
 		}
 
@@ -90,7 +91,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userRepository = value;
-				OnPropertyChanged(nameof(UserRepository));
+				OnPropertyChanged();
 			}
 		}
 
@@ -135,7 +136,7 @@ namespace FluffyFox.ViewModels
 			IsDialogOpen = false;
 		}
 
-		private void OnOpenLinkCommand(object parameter)
+		private static void OnOpenLinkCommand(object parameter)
 		{
 			Process.Start(new ProcessStartInfo("cmd", $"/c start {parameter}"));
 		}

@@ -1,11 +1,11 @@
-﻿using DataAccess.Entities;
-using DataAccess.Models;
+﻿using DataAccess.Models;
 
-namespace FluffyFox.Helpers
+namespace FluffyFox.Repositories
 {
 	public interface IUserRepository
 	{
 		Task<UsersModel> GetUserByKeyAsync(string key);
+		Task<UsersModel> GetUserByEmailAsync(string key);
 		Task<bool> IsKeyValidAsync(string key);
 		Task<bool> IsKeyUniqueAsync(string key);
 		Task<string> GenerateUniqueKeyAsync();

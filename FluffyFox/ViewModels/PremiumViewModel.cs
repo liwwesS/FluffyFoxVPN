@@ -29,7 +29,7 @@ namespace FluffyFox.ViewModels
 			OpenLinkCommand = new RelayCommand(OnOpenLinkCommand);
 		}
 
-		private void OnOpenLinkCommand(object parameter)
+		private static void OnOpenLinkCommand(object parameter)
 		{
 			Process.Start(new ProcessStartInfo("cmd", $"/c start {parameter}"));
 		}

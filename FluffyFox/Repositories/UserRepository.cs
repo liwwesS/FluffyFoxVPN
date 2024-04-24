@@ -1,5 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.Models;
+using FluffyFox.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace FluffyFox.Helpers
@@ -16,6 +17,12 @@ namespace FluffyFox.Helpers
 		public async Task<UsersModel> GetUserByKeyAsync(string key)
 		{
 			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Key == key);
+			return UsersModel.ToUserModelMap(user);
+		}
+		
+		public async Task<UsersModel> GetUserByEmailAsync(string email)
+		{
+			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
 			return UsersModel.ToUserModelMap(user);
 		}
 

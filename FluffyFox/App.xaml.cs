@@ -5,6 +5,7 @@ using FluffyFox.ViewModels;
 using FluffyFox.Views;
 using Microsoft.Extensions.DependencyInjection;
 using System.Windows;
+using FluffyFox.Repositories;
 
 namespace FluffyFox;
 

@@ -1,5 +1,6 @@
 ﻿using FluffyFox.Commands;
 using FluffyFox.Helpers;
+using FluffyFox.Repositories;
 using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
@@ -13,7 +14,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged(nameof(UserSession));
+				OnPropertyChanged();
 			}
 		}
 
@@ -24,7 +25,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged(nameof(Navigation));
+				OnPropertyChanged();
 			}
 		}
 
@@ -35,7 +36,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userRepository = value;
-				OnPropertyChanged(nameof(UserRepository));
+				OnPropertyChanged();
 			}
 		}
 

@@ -1,5 +1,6 @@
 ﻿using FluffyFox.Commands;
 using FluffyFox.Helpers;
+using FluffyFox.Repositories;
 using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
@@ -13,7 +14,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged(nameof(UserSession));
+				OnPropertyChanged();
 			}
 		}
 
@@ -39,8 +40,8 @@ namespace FluffyFox.ViewModels
 			}
 		}
 
-		public RelayCommand NavigateToLoginCommand { get; set; }
-		public RelayCommand NavigateToHomeCommand { get; set; }
+		public RelayCommand NavigateToLoginCommand { get; }
+		public RelayCommand NavigateToHomeCommand { get; }
 
 		public AuthorizeViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository)
 		{

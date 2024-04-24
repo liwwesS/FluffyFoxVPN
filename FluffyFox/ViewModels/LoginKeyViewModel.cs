@@ -2,6 +2,7 @@
 using FluffyFox.Helpers;
 using FluffyFox.Services;
 using System.Windows;
+using FluffyFox.Repositories;
 
 namespace FluffyFox.ViewModels
 {
@@ -14,7 +15,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_enteredKey = value;
-				OnPropertyChanged(nameof(EnteredKey));
+				OnPropertyChanged();
 			}
 		}
 
@@ -25,7 +26,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userSession = value;
-				OnPropertyChanged(nameof(UserSession));
+				OnPropertyChanged();
 			}
 		}
 
@@ -36,7 +37,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_navigation = value;
-				OnPropertyChanged(nameof(Navigation));
+				OnPropertyChanged();
 			}
 		}
 
@@ -47,7 +48,7 @@ namespace FluffyFox.ViewModels
 			set
 			{
 				_userRepository = value;
-				OnPropertyChanged(nameof(UserRepository));
+				OnPropertyChanged();
 			}
 		}
 

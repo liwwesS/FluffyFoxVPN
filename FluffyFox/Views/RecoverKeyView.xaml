@@ -81,6 +81,7 @@
                         CaretBrush="#fcfefe"
                         FontSize="14"
                         Foreground="#BABCC7"
+                        Text="{Binding Email}"
                         Style="{StaticResource MaterialDesignTextBox}"
                         TextAlignment="Left" />
                 </Grid>
@@ -88,9 +89,9 @@
 
             <Button
                 Width="344"
-                Height="49"
                 Margin="0,18,0,0"
                 Content="Отправить"
+                Command="{Binding SendKeyCommand}"
                 Style="{StaticResource RoundOrangeButton}" />
         </StackPanel>
     </Grid>

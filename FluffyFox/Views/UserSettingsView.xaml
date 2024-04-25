@@ -52,7 +52,19 @@
             <StackPanel
                 Margin="0,17,0,0"
                 VerticalAlignment="Center"
+                IsEnabled="{Binding IsEditable, UpdateSourceTrigger=PropertyChanged}"
                 Orientation="Horizontal">
+
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.5" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+
                 <Border
                     Width="286"
                     Height="54"
@@ -87,14 +99,15 @@
                             FontSize="13"
                             Foreground="#BABCC7"
                             Style="{StaticResource MaterialDesignTextBox}"
+                            Text="{Binding Email, Mode=TwoWay}"
                             TextAlignment="Left" />
                     </Grid>
                 </Border>
 
                 <Button
                     Width="49"
-                    Height="49"
                     Margin="10,0,0,0"
+                    Command="{Binding SendKeyCommand}"
                     Style="{StaticResource RoundOrangeButton}">
 
                     <Button.Background>

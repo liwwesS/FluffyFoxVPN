@@ -28,6 +28,8 @@ namespace DataAccess.Entities
 		public string? Token { get; set; }
 
 		[Column("tarif")]
+		[ForeignKey("TariffId")]
+		public int? TariffId { get; set; }
 		public ObservableCollection<Tarrifs>? Tariff { get; set; } = [];
 
 		[Column("email")]

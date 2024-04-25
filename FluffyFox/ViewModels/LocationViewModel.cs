@@ -5,16 +5,7 @@ namespace FluffyFox.ViewModels
 {
     public class LocationViewModel : ViewModelBase
 	{
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
 		public RelayCommand NavigateToHomeCommand { get; }
 

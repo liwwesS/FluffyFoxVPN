@@ -12,50 +12,16 @@ namespace FluffyFox.ViewModels
 {
     public class RecoveryKeyViewModel : ViewModelBase
     {
-	    private UserSession _userSession;
-	    public UserSession UserSession
-	    {
-		    get => _userSession;
-		    set
-		    {
-			    _userSession = value;
-			    OnPropertyChanged();
-		    }
-	    }
-	    
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
-		
-		private IUserRepository _userRepository;
-		public IUserRepository UserRepository
-		{
-			get => _userRepository;
-			set
-			{
-				_userRepository = value;
-				OnPropertyChanged();
-			}
-		}
+	    public UserSession UserSession { get; set; }
 
-		private string _email;
-		public string Email
-		{
-			get => _email;
-			set
-			{
-				_email = value;
-				OnPropertyChanged();
-			}
-		}
+	    public INavigationService Navigation { get; set; }
+
+	    public IUserRepository UserRepository { get; set; }
+	    
+		public string Email { get; set; }
+
 		public RelayCommand NavigateToLoginCommand { get; }
+
 		public ICommand SendKeyCommand { get; }
 
 		public RecoveryKeyViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository)
@@ -71,7 +37,7 @@ namespace FluffyFox.ViewModels
 		private async void OnSendEmailCommand(object parameter)
 		{
 
-			UserSession.CurrentUser = await _userRepository.GetUserByEmailAsync(Email);
+			UserSession.CurrentUser = await UserRepository.GetUserByEmailAsync(Email);
 			var user = UserSession.CurrentUser;
 
 			if (user == null) return;

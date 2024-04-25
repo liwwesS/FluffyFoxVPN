@@ -31,6 +31,7 @@ namespace DataAccess.Models
 			set => OnPropertyChanged(ref _token, value);
 		}
 
+		public int? TariffId { get; set; }
 		private ObservableCollection<TariffsModel>? _tariff;
 		public ObservableCollection<TariffsModel>? Tariff 
 		{
@@ -54,7 +55,7 @@ namespace DataAccess.Models
 				Key = user.Key,
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
-				Tariff = user.Tariff != null ? new ObservableCollection<TariffsModel>(user.Tariff.ToList().Select(TariffsModel.ToTariffModelMap)) : [],
+				TariffId = user.TariffId,
 				Email = user.Email ?? null
 			};
 		}
@@ -68,7 +69,7 @@ namespace DataAccess.Models
 				Key = user.Key,
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
-				Tariff = user.Tariff != null ? new ObservableCollection<Tarrifs>(user.Tariff.ToList().Select(TariffsModel.ToTariffMap)) : [],
+				TariffId = user.TariffId,
 				Email = user.Email ?? null
 			};
 		}

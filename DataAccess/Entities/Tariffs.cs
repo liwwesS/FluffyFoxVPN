@@ -24,5 +24,7 @@ namespace DataAccess.Entities
 		[Column("created_at")]
 		public DateTime? DateOfCreate { get; set; }
 
+
+		public virtual ICollection<Users> Users { get; set; }
 	}
 }

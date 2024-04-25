@@ -1,7 +1,8 @@
-using FluffyFox.Library;
+using System.ComponentModel;
 
 namespace FluffyFox.ViewModels;
 
-public abstract class ViewModelBase : ObservableObject
+public abstract class ViewModelBase : INotifyPropertyChanged
 {
+	public event PropertyChangedEventHandler? PropertyChanged;
 }

@@ -3,54 +3,19 @@ using FluffyFox.Helpers;
 using FluffyFox.Services;
 using System.Windows;
 using FluffyFox.Repositories;
+using FluffyFox.Library;
 
 namespace FluffyFox.ViewModels
 {
     public class LoginKeyViewModel : ViewModelBase
     {
-		private string _enteredKey;
-		public string EnteredKey
-		{
-			get => _enteredKey;
-			set
-			{
-				_enteredKey = value;
-				OnPropertyChanged();
-			}
-		}
+		public string EnteredKey { get; set; }
 
-		private UserSession _userSession;
-		public UserSession UserSession
-		{
-			get => _userSession;
-			set
-			{
-				_userSession = value;
-				OnPropertyChanged();
-			}
-		}
+		public UserSession UserSession { get; set; }
 
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
-		private IUserRepository _userRepository;
-		public IUserRepository UserRepository
-		{
-			get => _userRepository;
-			set
-			{
-				_userRepository = value;
-				OnPropertyChanged();
-			}
-		}
+		public IUserRepository UserRepository { get; set; }
 
 		public RelayCommand NavigateToAuthorizeCommand { get; }
 		public RelayCommand NavigateToRecoveryCommand { get; }
@@ -61,6 +26,8 @@ namespace FluffyFox.ViewModels
 			Navigation = navigationService;
 			UserSession = userSession;
 			UserRepository = userRepository;
+
+			
 
 			NavigateToAuthorizeCommand = new RelayCommand(o => { Navigation.NavigateTo<AuthorizeViewModel>(); }, o => true);
 			NavigateToRecoveryCommand = new RelayCommand(o => { Navigation.NavigateTo<RecoveryKeyViewModel>(); }, o => true);
@@ -80,16 +47,17 @@ namespace FluffyFox.ViewModels
 				return;
 			}
 
-			var isKeyValid = await _userRepository.IsKeyValidAsync(EnteredKey);
-
+			var key = KeyFormat.RemoveSpaces(EnteredKey);
+			var isKeyValid = await UserRepository.IsKeyValidAsync(key);
+			
 			if (isKeyValid)
 			{
-				UserSession.CurrentUser = await _userRepository.GetUserByKeyAsync(EnteredKey);
+				UserSession.CurrentUser = await UserRepository.GetUserByKeyAsync(key);
 				Navigation.NavigateTo<HomeViewModel>();
 			}
 			else
 			{
-				MessageBox.Show("Введенный ключ недействителен. Пожалуйста, попробуйте снова.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+				MessageBox.Show("Введенный ключ недействителен.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
 			}
 		}
 	}

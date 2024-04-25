@@ -6,16 +6,7 @@ namespace FluffyFox.ViewModels
 {
     public class MainViewModel : ViewModelBase
 	{
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
 		public ICommand DragMoveCommand { get; }
 		public ICommand CloseCommand { get; }

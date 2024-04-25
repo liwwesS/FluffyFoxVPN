@@ -8,8 +8,10 @@ namespace FluffyFox.Repositories
 		Task<UsersModel> GetUserByEmailAsync(string key);
 		Task<bool> IsKeyValidAsync(string key);
 		Task<bool> IsKeyUniqueAsync(string key);
+		Task<bool> IsEmailUniqueAsync(string email);
 		Task<string> GenerateUniqueKeyAsync();
 		Task AddUserAsync(string key);
+		Task UpdateUserAsync(UsersModel user);
 	}
 
 }

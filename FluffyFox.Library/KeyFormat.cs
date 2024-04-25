@@ -19,4 +19,9 @@ public static class KeyFormat
 
         return formattedBuilder.ToString();
     }
+
+	public static string RemoveSpaces(string formattedString)
+	{
+		return formattedString.Replace(" ", "");
+	}
 }

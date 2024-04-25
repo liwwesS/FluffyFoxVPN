@@ -7,38 +7,11 @@ namespace FluffyFox.ViewModels
 {
     public class HomeViewModel : ViewModelBase
 	{
-		private UserSession _userSession;
-		public UserSession UserSession
-		{
-			get => _userSession;
-			set
-			{
-				_userSession = value;
-				OnPropertyChanged();
-			}
-		}
+		public UserSession UserSession { get; set; }
 
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
-		private IUserRepository _userRepository;
-		public IUserRepository UserRepository
-		{
-			get => _userRepository;
-			set
-			{
-				_userRepository = value;
-				OnPropertyChanged();
-			}
-		}
+		public IUserRepository UserRepository { get; set; }
 
 		public RelayCommand NavigateToPremiumCommand { get; }
 		public RelayCommand NavigateToSettingsCommand { get; }

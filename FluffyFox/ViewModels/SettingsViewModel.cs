@@ -9,91 +9,32 @@ namespace FluffyFox.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-		private bool _isDialogOpen;
-		public bool IsDialogOpen
-		{
-			get => _isDialogOpen;
-			set 
-			{
-				OnPropertyChanged(ref _isDialogOpen, value);
-				OnPropertyChanged(nameof(BlurEffect));
-			} 
-		}
-
-		private System.Windows.Controls.Primitives.Popup _copyPopup;
-		public System.Windows.Controls.Primitives.Popup CopyPopup
-		{
-			get { return _copyPopup; }
-			set
-			{
-				_copyPopup = value;
-				OnPropertyChanged(nameof(CopyPopup));
-			}
-		}
-
-		private System.Windows.Media.Effects.Effect _blurEffect;
+		public bool IsDialogOpen { get; set; }
+		
 		public System.Windows.Media.Effects.Effect BlurEffect
 		{
 			get
 			{
 				if (IsDialogOpen)
 				{
-					_blurEffect = new System.Windows.Media.Effects.BlurEffect { Radius = 15 };
+					return new System.Windows.Media.Effects.BlurEffect { Radius = 15 };
 				}
 				else
 				{
-					_blurEffect = null;
+					return null;
 				}
-
-				return _blurEffect;
 			}
 		}
+		
+		public System.Windows.Controls.Primitives.Popup CopyPopup { get; set; }
+		
+		public string Key { get; set; }
+		
+		public UserSession UserSession { get; set; }
 
-		private UserSession _userSession;
-		public UserSession UserSession
-		{
-			get => _userSession;
-			set
-			{
-				_userSession = value;
-				OnPropertyChanged(nameof(UserSession));
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
-		private string _key;
-		public string Key
-		{
-			get => _key;
-			set
-			{
-
-				_key = value;
-				OnPropertyChanged(nameof(Key));
-
-			}
-		}
-
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
-
-		private IUserRepository _userRepository;
-		public IUserRepository UserRepository
-		{
-			get => _userRepository;
-			set
-			{
-				_userRepository = value;
-				OnPropertyChanged();
-			}
-		}
+		public IUserRepository UserRepository { get; set; }
 
 		public RelayCommand NavigateToHomeCommand { get; }
 		public RelayCommand NavigateToPremiumCommand { get; }

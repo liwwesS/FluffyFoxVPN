@@ -7,16 +7,7 @@ namespace FluffyFox.ViewModels
 {
     public class PremiumViewModel : ViewModelBase
 	{
-		private INavigationService _navigation;
-		public INavigationService Navigation
-		{
-			get => _navigation;
-			set
-			{
-				_navigation = value;
-				OnPropertyChanged();
-			}
-		}
+		public INavigationService Navigation { get; set; }
 
 		public RelayCommand NavigateToHomeCommand { get; }
 		public ICommand OpenLinkCommand { get; }

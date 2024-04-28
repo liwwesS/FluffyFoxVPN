@@ -7,7 +7,7 @@ public class RelayCommand<T> : ICommand
     private readonly Predicate<T> _canExecute;
     private readonly Action<T> _execute;
 
-    public RelayCommand(Action<T> execute)
+    public RelayCommand(Action<T> execute, object unknown)
         : this(execute, null)
     {
         _execute = execute;

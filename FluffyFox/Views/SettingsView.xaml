@@ -150,7 +150,6 @@
 
                         <Button
                             x:Name="CopyButton"
-                            Width="20"
                             Height="20"
                             Margin="60,0,0,0"
                             Command="{Binding CopyCommand}"

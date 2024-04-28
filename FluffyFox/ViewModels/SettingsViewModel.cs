@@ -19,10 +19,8 @@ namespace FluffyFox.ViewModels
 				{
 					return new System.Windows.Media.Effects.BlurEffect { Radius = 15 };
 				}
-				else
-				{
-					return null;
-				}
+
+				return null;
 			}
 		}
 		

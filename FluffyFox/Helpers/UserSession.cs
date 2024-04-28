@@ -5,5 +5,7 @@ namespace FluffyFox.Helpers
     public class UserSession
     {
         public UsersModel CurrentUser { get; set; }
+        
+        public string Region { get; set; }
     }
 }

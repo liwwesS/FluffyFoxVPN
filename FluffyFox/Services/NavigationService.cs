@@ -5,7 +5,7 @@ namespace FluffyFox.Services
 {
     public class NavigationService : ObservableObject, INavigationService
 	{
-		public Func<Type, ViewModelBase> _viewModelFactory { get; }
+		private Func<Type, ViewModelBase> _viewModelFactory { get; }
 
 		private ViewModelBase _currentView;
 		public ViewModelBase CurrentView
@@ -25,7 +25,7 @@ namespace FluffyFox.Services
 
         public void NavigateTo<TViewModel>() where TViewModel : ViewModelBase
 		{
-			ViewModelBase viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+			var viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
 			CurrentView = viewModel;
 		}
 	}

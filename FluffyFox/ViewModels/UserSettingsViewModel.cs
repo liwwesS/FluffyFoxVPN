@@ -12,11 +12,11 @@ namespace FluffyFox.ViewModels
 {
 	public class UserSettingsViewModel : ViewModelBase
     {
-	    public UserSession UserSession { get; set; }
+	    private UserSession UserSession { get; set; }
 
-	    public INavigationService Navigation { get; set; }
+	    private INavigationService Navigation { get; set; }
 
-	    public IUserRepository UserRepository { get; set; }
+	    private IUserRepository UserRepository { get; set; }
 	    
 	    public string Email { get; set; }
 	    public string Key { get; set; }

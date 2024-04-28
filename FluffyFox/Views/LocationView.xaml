@@ -100,44 +100,37 @@
 
                         <Grid Margin="0,20,0,20">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="52" />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <Grid Grid.Column="0">
-                                <Image
-                                    Width="42"
-                                    Height="42"
-                                    Source="{StaticResource RussiaIcon}" />
-                            </Grid>
+                            <Button
+                                Grid.Column="0"
+                                Command="{Binding NavigateToHomeRussiaCommand}"
+                                Content="Россия"
+                                Style="{StaticResource VpnFreeButton}"
+                                Tag="{StaticResource RussiaIcon}" />
 
-                            <Grid Grid.Column="1" Margin="10,0,0,0">
-                                <StackPanel VerticalAlignment="Center">
-                                    <TextBlock
-                                        FontSize="15"
-                                        Foreground="#BABCC7"
-                                        Text="Россия" />
-                                    <TextBlock
-                                        Margin="0,2,0,0"
-                                        FontSize="13"
-                                        Foreground="#BABCC7"
-                                        Opacity="0.7"
-                                        Text="Екатеринбург" />
-                                </StackPanel>
-                            </Grid>
-
-                            <Grid Grid.Column="2">
+                            <Grid Grid.Column="1">
                                 <StackPanel
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
 
-                                    <TextBlock
-                                        VerticalAlignment="Center"
-                                        FontSize="13"
-                                        Foreground="#FF7201"
-                                        Text="42 ping" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            FontSize="13"
+                                            Foreground="#FF7201"
+                                            Text="{Binding RussiaPing}" />
+
+                                        <TextBlock
+                                            Margin="5,0,0,0"
+                                            VerticalAlignment="Center"
+                                            FontSize="13"
+                                            Foreground="#FF7201"
+                                            Text="ping" />
+                                    </StackPanel>
 
                                     <ToggleButton
                                         Width="20"
@@ -170,44 +163,37 @@
 
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="45"
-                                Height="45"
-                                Source="{StaticResource GermanyIcon}" />
-                        </Grid>
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding NavigateToHomeGermanyCommand}"
+                            Content="Германия"
+                            Style="{StaticResource VpnPremiumButton}"
+                            Tag="{StaticResource GermanyIcon}" />
 
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="15"
-                                    Foreground="#BABCC7"
-                                    Text="Германия" />
-                                <TextBlock
-                                    Margin="0,2,0,0"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="Берлин" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid Grid.Column="2">
+                        <Grid Grid.Column="1">
                             <StackPanel
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
 
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="13"
-                                    Foreground="#FF7201"
-                                    Text="29 ping" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="{Binding GermanyPing}" />
+
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="ping" />
+                                </StackPanel>
 
                                 <Image
                                     Width="19"
@@ -220,44 +206,37 @@
 
                     <Grid Margin="0,20,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="45"
-                                Height="45"
-                                Source="{StaticResource FranceIcon}" />
-                        </Grid>
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding NavigateToHomeFranceCommand}"
+                            Content="Франция"
+                            Style="{StaticResource VpnPremiumButton}"
+                            Tag="{StaticResource FranceIcon}" />
 
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="15"
-                                    Foreground="#BABCC7"
-                                    Text="Франция" />
-                                <TextBlock
-                                    Margin="0,2,0,0"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="Лимож" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid Grid.Column="2">
+                        <Grid Grid.Column="1">
                             <StackPanel
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
 
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="13"
-                                    Foreground="#FF7201"
-                                    Text="87 ping" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="{Binding FrancePing}" />
+
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="ping" />
+                                </StackPanel>
 
                                 <Image
                                     Width="19"
@@ -270,44 +249,37 @@
 
                     <Grid Margin="0,20,0,0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="45"
-                                Height="45"
-                                Source="{StaticResource CanadaIcon}" />
-                        </Grid>
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding NavigateToHomeCanadaCommand}"
+                            Content="Канада"
+                            Style="{StaticResource VpnPremiumButton}"
+                            Tag="{StaticResource CanadaIcon}" />
 
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="15"
-                                    Foreground="#BABCC7"
-                                    Text="Канада " />
-                                <TextBlock
-                                    Margin="0,2,0,0"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="Оттава" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Grid Grid.Column="2">
+                        <Grid Grid.Column="1">
                             <StackPanel
                                 HorizontalAlignment="Right"
                                 VerticalAlignment="Center"
                                 Orientation="Horizontal">
 
-                                <TextBlock
-                                    VerticalAlignment="Center"
-                                    FontSize="13"
-                                    Foreground="#FF7201"
-                                    Text="42 ping" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="{Binding CanadaPing}" />
+
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="ping" />
+                                </StackPanel>
 
                                 <Image
                                     Width="19"

@@ -487,5 +487,16 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    
+    <DrawingImage x:Key="PolandIcon">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <GeometryDrawing Brush="#FFE92B2B" Geometry="F0 M512,512z M0,0z M256,480C379.712,480 480,379.712 480,256 480,132.288 379.712,32 256,32 132.288,32 32,132.288 32,256 32,379.712 132.288,480 256,480z" />
+                    <GeometryDrawing Brush="#FFFBFBFB" Geometry="F0 M512,512z M0,0z M480,256C480,132.288 379.712,32 256,32 132.288,32 32,132.288 32,256z" />
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 
 </ResourceDictionary>

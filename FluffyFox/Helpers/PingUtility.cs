@@ -11,12 +11,10 @@ public class PingUtility
     public const string Germany = "DE20.vpnbook.com";
     public const string France = "FR200.vpnbook.com";
     public const string Canada = "CA149.vpnbook.com";
-    public const string Russia = "rus1.freevpn4you.online";
+    public const string Poland = "PL134.vpnbook.com";
     
     public const string UsernameVpnBook = "vpnbook";
-    public const string UsernameVpn4You = "freevpn4you";
     public const string PasswordVpnBook = "n8rfzew";
-    public const string PasswordVpn4You = "8729591";
     
     public event EventHandler<int> PingUpdated;
 

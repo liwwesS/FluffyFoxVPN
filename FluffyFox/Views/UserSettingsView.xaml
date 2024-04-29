@@ -49,77 +49,94 @@
                 Opacity="0.7"
                 Text="Привязка эл. почты" />
 
-            <StackPanel
-                Margin="0,17,0,0"
-                VerticalAlignment="Center"
-                IsEnabled="{Binding IsEditable, UpdateSourceTrigger=PropertyChanged}"
-                Orientation="Horizontal">
+            <StackPanel>
+                <StackPanel
+                    Margin="0,17,0,0"
+                    VerticalAlignment="Center"
+                    IsEnabled="{Binding IsEditable, UpdateSourceTrigger=PropertyChanged}"
+                    Orientation="Horizontal">
 
-                <StackPanel.Style>
-                    <Style TargetType="StackPanel">
-                        <Style.Triggers>
-                            <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </StackPanel.Style>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.5" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
 
-                <Border
-                    Width="286"
-                    Height="54"
-                    HorizontalAlignment="Left"
-                    Style="{StaticResource BorderStyle}">
+                    <Border
+                        Width="286"
+                        Height="54"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource BorderStyle}">
 
-                    <Grid Height="Auto">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="56" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                        <Grid Height="Auto">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="56" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <Image
+                                Grid.Column="0"
+                                Width="30"
+                                Height="30"
+                                Margin="0,0,0,4"
+                                Source="{StaticResource MailIcon}" />
+
+                            <TextBox
+                                Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                VerticalContentAlignment="Center"
+                                materialDesign:HintAssist.Foreground="#BABCC7"
+                                materialDesign:HintAssist.Hint="Введите эл. адрес"
+                                materialDesign:TextFieldAssist.UnderlineBrush="{x:Null}"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                CaretBrush="#fcfefe"
+                                FontFamily="/Assets/Fonts/#Inter Semi Bold"
+                                FontSize="13"
+                                Foreground="#BABCC7"
+                                Style="{StaticResource MaterialDesignTextBox}"
+                                Text="{Binding Email, Mode=TwoWay}"
+                                TextAlignment="Left" />
+                        </Grid>
+                    </Border>
+
+                    <Button
+                        Width="49"
+                        Margin="10,0,0,0"
+                        Command="{Binding SendKeyCommand}"
+                        Style="{StaticResource RoundOrangeButton}">
+
+                        <Button.Background>
+                            <SolidColorBrush Opacity="0.5" Color="#FF7201" />
+                        </Button.Background>
 
                         <Image
-                            Grid.Column="0"
                             Width="30"
                             Height="30"
-                            Margin="0,0,0,4"
-                            Source="{StaticResource MailIcon}" />
-
-                        <TextBox
-                            Grid.Column="1"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            VerticalContentAlignment="Center"
-                            materialDesign:HintAssist.Foreground="#BABCC7"
-                            materialDesign:HintAssist.Hint="Введите эл. адрес"
-                            materialDesign:TextFieldAssist.UnderlineBrush="{x:Null}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            CaretBrush="#fcfefe"
-                            FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                            FontSize="13"
-                            Foreground="#BABCC7"
-                            Style="{StaticResource MaterialDesignTextBox}"
-                            Text="{Binding Email, Mode=TwoWay}"
-                            TextAlignment="Left" />
-                    </Grid>
-                </Border>
-
-                <Button
-                    Width="49"
-                    Margin="10,0,0,0"
-                    Command="{Binding SendKeyCommand}"
-                    Style="{StaticResource RoundOrangeButton}">
-
-                    <Button.Background>
-                        <SolidColorBrush Opacity="0.5" Color="#FF7201" />
-                    </Button.Background>
-
-                    <Image
-                        Width="30"
-                        Height="30"
-                        Source="{StaticResource CheckIcon}" />
-                </Button>
+                            Source="{StaticResource CheckIcon}" />
+                    </Button>
+                </StackPanel>
             </StackPanel>
         </StackPanel>
+        <TextBlock
+            Margin="25,175,25,0"
+            FontSize="13"
+            Foreground="MediumSeaGreen"
+            Text="{Binding OkMessage}"
+            TextWrapping="Wrap"
+            Visibility="{Binding OkMessageVisibility}" />
+
+        <TextBlock
+            Margin="25,175,25,0"
+            FontSize="13"
+            Foreground="IndianRed"
+            Text="{Binding ErrorMessage}"
+            TextWrapping="Wrap"
+            Visibility="{Binding ErrorMessageVisibility}" />
     </Grid>
 </UserControl>

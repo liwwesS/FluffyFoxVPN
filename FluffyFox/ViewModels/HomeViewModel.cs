@@ -7,23 +7,23 @@ using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
 {
-    public class HomeViewModel : ViewModelBase
+	public class HomeViewModel : ViewModelBase
 	{
 		private readonly Dictionary<string, PingUtility> _pingUtilities = new();
 
-		public Visibility RussiaGridVisibility { get; private set; } = Visibility.Collapsed;
+		public Visibility PolandGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility GermanyGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility CanadaGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility FranceGridVisibility { get; private set; } = Visibility.Collapsed;
 
-		private bool IsVpnConnected { get; set; } = false;
+		public bool IsCheckedVpn { get; set; }
 
 		public int GermanyPing { get; private set; }
 		public int FrancePing { get; private set; }
 		public int CanadaPing { get; private set; }
-		public int RussiaPing { get; private set; }
-		
-		public UserSession UserSession { get; set; }
+		public int PolandPing { get; private set; }
+
+		private UserSession UserSession { get; set; }
 		private INavigationService Navigation { get; set; }
 		public IUserRepository UserRepository { get; set; }
 
@@ -39,14 +39,30 @@ namespace FluffyFox.ViewModels
 			UserSession = userSession;
 			UserRepository = userRepository;
 			
+			IsCheckedVpn = UserSession.IsVpnConnect;
+
 			InitializePingUtility(PingUtility.Germany, ping => GermanyPing = ping);
 			InitializePingUtility(PingUtility.France, ping => FrancePing = ping);
 			InitializePingUtility(PingUtility.Canada, ping => CanadaPing = ping);
-			InitializePingUtility(PingUtility.Russia, ping => RussiaPing = ping);
+			InitializePingUtility(PingUtility.Poland, ping => PolandPing = ping);
 
-			NavigateToPremiumCommand = new RelayCommand(o => { Navigation.NavigateTo<PremiumViewModel>(); }, o => true);
-			NavigateToSettingsCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, o => true);
-			NavigateToLocationCommand = new RelayCommand(o => { Navigation.NavigateTo<LocationViewModel>(); }, o => true);
+			NavigateToPremiumCommand = new RelayCommand(o => 
+			{
+
+				Navigation.NavigateTo<PremiumViewModel>();
+			}, o => true);
+
+			NavigateToSettingsCommand = new RelayCommand(o => 
+			{
+
+				Navigation.NavigateTo<SettingsViewModel>();
+			}, o => true);
+
+			NavigateToLocationCommand = new RelayCommand(o => 
+			{
+
+				Navigation.NavigateTo<LocationViewModel>();
+			}, o => true);
 
 			UpdateGridVisibility();
 			ConnectToVpnCommand = new RelayCommand(OnConnectToVpn);
@@ -54,15 +70,15 @@ namespace FluffyFox.ViewModels
 
 		private void UpdateGridVisibility()
 		{
-			RussiaGridVisibility = Visibility.Collapsed;
+			PolandGridVisibility = Visibility.Collapsed;
 			GermanyGridVisibility = Visibility.Collapsed;
 			CanadaGridVisibility = Visibility.Collapsed;
 			FranceGridVisibility = Visibility.Collapsed;
 			
 			switch (UserSession.Region)
 			{
-				case "RUS":
-					RussiaGridVisibility = Visibility.Visible;
+				case "PL":
+					PolandGridVisibility = Visibility.Visible;
 					break;
 				case "DE":
 					GermanyGridVisibility = Visibility.Visible;
@@ -74,11 +90,11 @@ namespace FluffyFox.ViewModels
 					FranceGridVisibility = Visibility.Visible;
 					break;
 				default:
-					RussiaGridVisibility = Visibility.Visible;
+					PolandGridVisibility = Visibility.Visible;
 					break;
 			}
 		}
-		
+
 		private void InitializePingUtility(string host, Action<int> setPingValue)
 		{
 			var pingUtility = new PingUtility(host);
@@ -87,51 +103,40 @@ namespace FluffyFox.ViewModels
 			pingUtility.Start();
 		}
 		
-		private void OnConnectToVpn(object parameter)
+		private async void OnConnectToVpn(object parameter)
 		{
-			var vpnManager = new VpnManager();
-			string region = UserSession.Region;
-			string userName;
-			string userPassword;
+			var region = UserSession.Region;
+			const string userName = PingUtility.UsernameVpnBook;
+			const string userPassword = PingUtility.PasswordVpnBook;
 
 			switch (region)
 			{
-				case "RUS":
-					region = PingUtility.Russia;
-					userName = PingUtility.UsernameVpn4You;
-					userPassword = PingUtility.PasswordVpn4You;
+				case "PL":
+					region = PingUtility.Poland;
 					break;
 				case "DE":
 					region = PingUtility.Germany;
-					userName = PingUtility.UsernameVpnBook;
-					userPassword = PingUtility.PasswordVpnBook;
 					break;
 				case "CA":
 					region = PingUtility.Canada;
-					userName = PingUtility.UsernameVpnBook;
-					userPassword = PingUtility.PasswordVpnBook;
 					break;
 				case "FR":
 					region = PingUtility.France;
-					userName = PingUtility.UsernameVpnBook;
-					userPassword = PingUtility.PasswordVpnBook;
 					break;
 				default:
-					region = PingUtility.Russia;
-					userName = PingUtility.UsernameVpn4You;
-					userPassword = PingUtility.PasswordVpn4You;
+					region = PingUtility.Poland;
 					break;
 			}
 
-			if (IsVpnConnected)
+			if (IsCheckedVpn)
 			{
-				vpnManager.Disconnect();
-				IsVpnConnected = false;
+				UserSession.IsVpnConnect = true;
+				await VpnManager.Connect(region, userName, userPassword);
 			}
 			else
 			{
-				vpnManager.Connect(region, userName, userPassword);
-				IsVpnConnected = true;
+				UserSession.IsVpnConnect = false;
+				await VpnManager.Disconnect();
 			}
 		}
 	}

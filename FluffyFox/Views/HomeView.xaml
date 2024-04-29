@@ -154,7 +154,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Margin="20,20,25,0">
-                    <Grid Visibility="{Binding RussiaGridVisibility}">
+                    <Grid Visibility="{Binding PolandGridVisibility}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="52" />
                             <ColumnDefinition />
@@ -165,7 +165,7 @@
                             <Image
                                 Width="42"
                                 Height="42"
-                                Source="{StaticResource RussiaIcon}" />
+                                Source="{StaticResource PolandIcon}" />
                         </Grid>
 
                         <Grid Grid.Column="1" Margin="10,0,0,0">
@@ -173,7 +173,7 @@
                                 <TextBlock
                                     FontSize="16"
                                     Foreground="#BABCC7"
-                                    Text="Россия" />
+                                    Text="Poland" />
                             </StackPanel>
                         </Grid>
 
@@ -197,7 +197,7 @@
                                     FontFamily="/Assets/Fonts/#Inter Semi Bold"
                                     FontSize="18"
                                     Foreground="#FF7201"
-                                    Text="{Binding RussiaPing}" />
+                                    Text="{Binding PolandPing}" />
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     FontFamily="/Assets/Fonts/#Inter Medium"
@@ -382,80 +382,13 @@
                         Orientation="Horizontal">
 
                         <ToggleButton
+                            Checked="ToggleButton_Checked"
                             Command="{Binding ConnectToVpnCommand}"
-                            Style="{StaticResource ConnectButton}">
-                            <ToggleButton.Triggers>
-                                <EventTrigger RoutedEvent="ToggleButton.Checked">
-                                    <BeginStoryboard x:Name="AnimationStoryboard">
-                                        <Storyboard x:Name="MyStoryBoard">
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grayFoxIcon" Storyboard.TargetProperty="Source">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource OrangeFoxIcon}" />
-                                            </ObjectAnimationUsingKeyFrames>
-
-                                            <DoubleAnimation
-                                                Storyboard.TargetName="grayFoxIcon"
-                                                Storyboard.TargetProperty="Opacity"
-                                                To="1"
-                                                Duration="0:0:1.5" />
-
-                                            <ColorAnimation
-                                                BeginTime="0:0:0"
-                                                Storyboard.TargetName="circle1"
-                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
-                                                To="#FF7201"
-                                                Duration="0:0:1" />
-                                            <ColorAnimation
-                                                BeginTime="0:0:0.2"
-                                                Storyboard.TargetName="circle2"
-                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
-                                                To="#FF7201"
-                                                Duration="0:0:1" />
-                                            <ColorAnimation
-                                                BeginTime="0:0:0.4"
-                                                Storyboard.TargetName="circle3"
-                                                Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
-                                                To="#FF7201"
-                                                Duration="0:0:1" />
-
-                                            <DoubleAnimation
-                                                AutoReverse="True"
-                                                BeginTime="0:0:0"
-                                                RepeatBehavior="Forever"
-                                                Storyboard.TargetName="circle1"
-                                                Storyboard.TargetProperty="Opacity"
-                                                From="0.2"
-                                                To="0.7"
-                                                Duration="0:0:1" />
-                                            <DoubleAnimation
-                                                AutoReverse="True"
-                                                BeginTime="0:0:0.2"
-                                                RepeatBehavior="Forever"
-                                                Storyboard.TargetName="circle2"
-                                                Storyboard.TargetProperty="Opacity"
-                                                From="0.15"
-                                                To="0.6"
-                                                Duration="0:0:1" />
-                                            <DoubleAnimation
-                                                AutoReverse="True"
-                                                BeginTime="0:0:0.4"
-                                                RepeatBehavior="Forever"
-                                                Storyboard.TargetName="circle3"
-                                                Storyboard.TargetProperty="Opacity"
-                                                From="0.1"
-                                                To="0.5"
-                                                Duration="0:0:1" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
-                                    <StopStoryboard BeginStoryboardName="AnimationStoryboard" />
-                                </EventTrigger>
-                            </ToggleButton.Triggers>
-                        </ToggleButton>
-
+                            IsChecked="{Binding IsCheckedVpn}"
+                            Style="{StaticResource ConnectButton}"
+                            Unchecked="ToggleButton_Unchecked" />
                         <Button
                             Width="49"
-                            Height="49"
                             Margin="10,0,0,0"
                             Command="{Binding NavigateToLocationCommand}"
                             Style="{StaticResource RoundOrangeButton}">

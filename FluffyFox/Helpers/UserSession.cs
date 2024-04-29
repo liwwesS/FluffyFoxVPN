@@ -7,5 +7,7 @@ namespace FluffyFox.Helpers
         public UsersModel CurrentUser { get; set; }
         
         public string Region { get; set; }
+
+        public bool IsVpnConnect { get; set; } = false;
     }
 }

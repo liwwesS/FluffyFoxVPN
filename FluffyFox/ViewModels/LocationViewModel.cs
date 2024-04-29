@@ -7,19 +7,20 @@ namespace FluffyFox.ViewModels
 {
     public class LocationViewModel : ViewModelBase
 	{
-		public UserSession UserSession { get; set; }
+		private UserSession UserSession { get; set; }
 		private INavigationService Navigation { get; set; }
 		public IUserRepository UserRepository { get; set; }
 		
 		private readonly Dictionary<string, PingUtility> _pingUtilities = new();
 		
+		public bool IsEnabledVpn { get; set; }
 		public int GermanyPing { get; private set; }
 		public int FrancePing { get; private set; }
 		public int CanadaPing { get; private set; }
-		public int RussiaPing { get; private set; }
+		public int PolandPing { get; private set; }
 		
 		public RelayCommand NavigateToHomeCommand { get; }
-		public RelayCommand NavigateToHomeRussiaCommand { get; private set; }
+		public RelayCommand NavigateToHomePolandCommand { get; private set; }
 		public RelayCommand NavigateToHomeGermanyCommand { get; private set; }
 		public RelayCommand NavigateToHomeCanadaCommand { get; private set; }
 		public RelayCommand NavigateToHomeFranceCommand { get; private set; }
@@ -33,13 +34,15 @@ namespace FluffyFox.ViewModels
 			InitializePingUtility(PingUtility.Germany, ping => GermanyPing = ping);
 			InitializePingUtility(PingUtility.France, ping => FrancePing = ping);
 			InitializePingUtility(PingUtility.Canada, ping => CanadaPing = ping);
-			InitializePingUtility(PingUtility.Russia, ping => RussiaPing = ping);
+			InitializePingUtility(PingUtility.Poland, ping => PolandPing = ping);
+			
+			CheckUserTariff();
 			
 			NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
 			
-			NavigateToHomeRussiaCommand = new RelayCommand(o =>
+			NavigateToHomePolandCommand = new RelayCommand(o =>
 			{
-				UserSession.Region = "RUS";
+				UserSession.Region = "PL";
 				Navigation.NavigateTo<HomeViewModel>();
 			}, o => true);
 			
@@ -60,6 +63,12 @@ namespace FluffyFox.ViewModels
 				UserSession.Region = "FR";
 				Navigation.NavigateTo<HomeViewModel>();
 			}, o => true);
+		}
+
+		private void CheckUserTariff()
+		{
+			var user = UserSession.CurrentUser;
+			IsEnabledVpn = user.TariffId != 20;
 		}
 		
 		private void InitializePingUtility(string host, Action<int> setPingValue)

@@ -9,7 +9,68 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/Icons/Icons.xaml" />
                 <ResourceDictionary Source="Assets/Styles/Styles.xaml" />
+                <ResourceDictionary Source="Assets/Animations/Animations.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Storyboard x:Key="MyAnimation">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetName="grayFoxIcon" Storyboard.TargetProperty="Source">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource OrangeFoxIcon}" />
+                </ObjectAnimationUsingKeyFrames>
+
+                <DoubleAnimation
+                    Storyboard.TargetName="grayFoxIcon"
+                    Storyboard.TargetProperty="Opacity"
+                    To="1"
+                    Duration="0:0:1.5" />
+
+                <ColorAnimation
+                    BeginTime="0:0:0"
+                    Storyboard.TargetName="circle1"
+                    Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                    To="#FF7201"
+                    Duration="0:0:1" />
+                <ColorAnimation
+                    BeginTime="0:0:0.2"
+                    Storyboard.TargetName="circle2"
+                    Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                    To="#FF7201"
+                    Duration="0:0:1" />
+                <ColorAnimation
+                    BeginTime="0:0:0.4"
+                    Storyboard.TargetName="circle3"
+                    Storyboard.TargetProperty="(Ellipse.Stroke).(SolidColorBrush.Color)"
+                    To="#FF7201"
+                    Duration="0:0:1" />
+
+                <DoubleAnimation
+                    AutoReverse="True"
+                    BeginTime="0:0:0"
+                    RepeatBehavior="Forever"
+                    Storyboard.TargetName="circle1"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.2"
+                    To="0.7"
+                    Duration="0:0:1" />
+                <DoubleAnimation
+                    AutoReverse="True"
+                    BeginTime="0:0:0.2"
+                    RepeatBehavior="Forever"
+                    Storyboard.TargetName="circle2"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.15"
+                    To="0.6"
+                    Duration="0:0:1" />
+                <DoubleAnimation
+                    AutoReverse="True"
+                    BeginTime="0:0:0.4"
+                    RepeatBehavior="Forever"
+                    Storyboard.TargetName="circle3"
+                    Storyboard.TargetProperty="Opacity"
+                    From="0.1"
+                    To="0.5"
+                    Duration="0:0:1" />
+            </Storyboard>
+
 
             <DataTemplate DataType="{x:Type viewmodel:AuthorizeViewModel}">
                 <view:AuthorizeView />

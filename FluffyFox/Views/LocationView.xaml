@@ -106,10 +106,10 @@
 
                             <Button
                                 Grid.Column="0"
-                                Command="{Binding NavigateToHomeRussiaCommand}"
-                                Content="Россия"
-                                Style="{StaticResource VpnFreeButton}"
-                                Tag="{StaticResource RussiaIcon}" />
+                                Command="{Binding NavigateToHomePolandCommand}"
+                                Content="Польша"
+                                Style="{StaticResource VpnPremiumButton}"
+                                Tag="{StaticResource PolandIcon}" />
 
                             <Grid Grid.Column="1">
                                 <StackPanel
@@ -122,7 +122,7 @@
                                             VerticalAlignment="Center"
                                             FontSize="13"
                                             Foreground="#FF7201"
-                                            Text="{Binding RussiaPing}" />
+                                            Text="{Binding PolandPing}" />
 
                                         <TextBlock
                                             Margin="5,0,0,0"
@@ -158,9 +158,20 @@
 
                 <StackPanel
                     Grid.Row="1"
-                    Margin="0,20,0,0"
-                    Opacity="0.4">
+                    IsEnabled="{Binding IsEnabledVpn}"
+                    Margin="0,20,0,0">
 
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="Opacity" Value="0.4" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+
+                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -195,11 +206,10 @@
                                         Text="ping" />
                                 </StackPanel>
 
-                                <Image
-                                    Width="19"
-                                    Height="19"
+                                <ToggleButton
+                                    Width="20"
                                     Margin="15,0,0,0"
-                                    Source="{StaticResource LockIcon}" />
+                                    Style="{StaticResource FavouriteButton}" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -238,11 +248,10 @@
                                         Text="ping" />
                                 </StackPanel>
 
-                                <Image
-                                    Width="19"
-                                    Height="19"
+                                <ToggleButton
+                                    Width="20"
                                     Margin="15,0,0,0"
-                                    Source="{StaticResource LockIcon}" />
+                                    Style="{StaticResource FavouriteButton}" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -281,11 +290,10 @@
                                         Text="ping" />
                                 </StackPanel>
 
-                                <Image
-                                    Width="19"
-                                    Height="19"
+                                <ToggleButton
+                                    Width="20"
                                     Margin="15,0,0,0"
-                                    Source="{StaticResource LockIcon}" />
+                                    Style="{StaticResource FavouriteButton}" />
                             </StackPanel>
                         </Grid>
                     </Grid>

@@ -408,63 +408,6 @@
         </Style.Triggers>
     </Style>
 
-    <Style x:Key="VpnFreeButton" TargetType="Button">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="Cursor" Value="Hand" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="Button">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="42"
-                                Height="42"
-                                Source="{TemplateBinding Tag}" />
-                        </Grid>
-
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="16"
-                                    Foreground="#BABCC7"
-                                    Text="{TemplateBinding Content}" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Trigger.EnterActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetProperty="Opacity"
-                                To="0.8"
-                                Duration="0:0:0.1" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.EnterActions>
-                <Trigger.ExitActions>
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <DoubleAnimation
-                                Storyboard.TargetProperty="Opacity"
-                                To="1"
-                                Duration="0:0:0.1" />
-                        </Storyboard>
-                    </BeginStoryboard>
-                </Trigger.ExitActions>
-            </Trigger>
-        </Style.Triggers>
-    </Style>
-
     <Style x:Key="VpnPremiumButton" TargetType="Button">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -601,7 +544,10 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType=StackPanel}}" Value="False">
+                            <Setter TargetName="icon" Property="Source" Value="{StaticResource LockIcon}" />
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource Self}}" Value="True">
                             <Setter TargetName="icon" Property="Source" Value="{StaticResource FilledStarIcon}" />
                         </DataTrigger>
                         <Trigger Property="IsMouseOver" Value="True">

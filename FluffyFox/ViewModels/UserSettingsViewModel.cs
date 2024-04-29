@@ -1,12 +1,12 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using System.Windows;
 using System.Windows.Input;
 using FluffyFox.Commands;
 using FluffyFox.Helpers;
 using FluffyFox.Library;
 using FluffyFox.Services;
 using FluffyFox.Repositories;
+using System.Windows;
 
 namespace FluffyFox.ViewModels
 {
@@ -20,8 +20,12 @@ namespace FluffyFox.ViewModels
 	    
 	    public string Email { get; set; }
 	    public string Key { get; set; }
-	    
+		public string ErrorMessage { get; set; }
+		public string OkMessage { get; set; }
 	    public bool IsEditable { get; set; }
+
+		public Visibility ErrorMessageVisibility { get; private set; } = Visibility.Collapsed;
+		public Visibility OkMessageVisibility { get; private set; } = Visibility.Collapsed;
 
 		public RelayCommand NavigateToSettingsCommand { get; }
 		public ICommand SendKeyCommand { get; }
@@ -43,6 +47,9 @@ namespace FluffyFox.ViewModels
 		
 		private async void OnSendEmailCommand(object parameter)
 		{
+			ErrorMessageVisibility = Visibility.Collapsed;
+			OkMessageVisibility = Visibility.Collapsed;
+
 			var user = await UserRepository.GetUserByKeyAsync(Key);
 			var isEmailUnique = await UserRepository.IsEmailUniqueAsync(Email);
 
@@ -51,13 +58,24 @@ namespace FluffyFox.ViewModels
 
 			if (!isEmailUnique)
 			{
-				MessageBox.Show("Пользователь с таким адресом электронной почты уже зарегистрирован.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-				return;
+				if (!string.IsNullOrWhiteSpace(Email))
+				{
+					ErrorMessage = "Пользователь с таким адресом электронной почты уже зарегистрирован.";
+					ErrorMessageVisibility = Visibility.Visible;
+					return;
+				}
+				else
+				{
+					ErrorMessage = "Поле ввода электронной почты не должно быть пустым.";
+					ErrorMessageVisibility = Visibility.Visible;
+					return;
+				}
 			}
 
 			if (!IsValidEmail(Email))
 			{
-				MessageBox.Show("Некорректный формат электронной почты.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+				ErrorMessage = "Некорректный формат электронной почты.";
+				ErrorMessageVisibility= Visibility.Visible;
 				return;
 			}
 
@@ -100,7 +118,8 @@ namespace FluffyFox.ViewModels
 
 			smtpClient.Send(message);
 
-			MessageBox.Show("Ключ успешно отправлен на почту!");
+			OkMessage = "Ключ успешно отправлен на почту!";
+			OkMessageVisibility = Visibility.Visible;
 		}
 
 		private bool IsValidEmail(string email)

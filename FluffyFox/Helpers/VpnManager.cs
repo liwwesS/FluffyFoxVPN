@@ -8,7 +8,7 @@ public class VpnManager
 {
     private static string FolderPath => string.Concat(Directory.GetCurrentDirectory(),
         "\\VPN");
-    public void Connect(string vpnName, string username, string password)
+    public static async Task Connect(string vpnName, string username, string password)
     {
         if (!Directory.Exists(FolderPath))
             Directory.CreateDirectory(FolderPath);
@@ -21,7 +21,7 @@ public class VpnManager
         sb.AppendLine("DEVICE=vpn");
         sb.AppendLine("PhoneNumber=" + vpnName);
         
-        File.WriteAllText(FolderPath + "\\VpnConnection.pbk", sb.ToString());
+        await File.WriteAllTextAsync(FolderPath + "\\VpnConnection.pbk", sb.ToString());
         
         var process = new Process();
         var startInfo = new ProcessStartInfo
@@ -33,11 +33,12 @@ public class VpnManager
             CreateNoWindow = true
         };
         process.StartInfo = startInfo;
-        process.Start();
-        process.WaitForExit();
+        
+        await Task.Run(() => process.Start());
+        await process.WaitForExitAsync();
     }
 
-    public void Disconnect()
+    public static async Task Disconnect()
     {
         using var process = new Process();
         var startInfo = new ProcessStartInfo
@@ -49,7 +50,8 @@ public class VpnManager
             CreateNoWindow = true
         };
         process.StartInfo = startInfo;
-        process.Start();
-        process.WaitForExit();
+        
+        await Task.Run(() => process.Start());
+        await process.WaitForExitAsync();
     }   
 }

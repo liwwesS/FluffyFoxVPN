@@ -487,7 +487,7 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-    
+
     <DrawingImage x:Key="PolandIcon">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V512 H512 V0 H0 Z">

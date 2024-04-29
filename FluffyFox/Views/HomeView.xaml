@@ -143,6 +143,31 @@
             Grid.Row="2"
             Height="160"
             Margin="18"
+            Background="#26292E"
+            CornerRadius="15 15 0 0"
+            Visibility="{Binding IPGridVisibility}">
+
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock
+                    Margin="0,7,0,0"
+                    VerticalAlignment="Top"
+                    FontSize="14"
+                    Foreground="#BABCC7"
+                    Text="Ваш IP:" />
+
+                <TextBlock
+                    Margin="5,7,0,0"
+                    VerticalAlignment="Top"
+                    FontSize="14"
+                    Foreground="#BABCC7"
+                    Text="{Binding IP}" />
+            </StackPanel>
+
+        </Border>
+        <Border
+            Grid.Row="2"
+            Height="160"
+            Margin="18"
             VerticalAlignment="Bottom"
             Background="#212429"
             CornerRadius="15">

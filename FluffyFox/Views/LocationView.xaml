@@ -51,48 +51,7 @@
                             Text="Локации" />
                     </StackPanel>
 
-                    <Border
-                        Width="344"
-                        Height="54"
-                        Margin="0,17,0,0"
-                        Style="{StaticResource BorderStyle}">
-
-                        <Grid Height="Auto">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="51" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
-
-                            <materialDesign:PackIcon
-                                Grid.Column="0"
-                                Width="25"
-                                Height="25"
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Foreground="#BABCC7"
-                                Kind="Search"
-                                Opacity="0.7" />
-
-                            <TextBox
-                                Grid.Column="1"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                VerticalContentAlignment="Center"
-                                materialDesign:HintAssist.Foreground="#BABCC7"
-                                materialDesign:HintAssist.Hint="Поиск региона"
-                                materialDesign:TextFieldAssist.UnderlineBrush="{x:Null}"
-                                Background="Transparent"
-                                BorderThickness="0"
-                                CaretBrush="#fcfefe"
-                                FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                                FontSize="13"
-                                Foreground="#BABCC7"
-                                Style="{StaticResource MaterialDesignTextBox}"
-                                TextAlignment="Left" />
-                        </Grid>
-                    </Border>
-
-                    <StackPanel Margin="0,17,0,0">
+                    <StackPanel Margin="0,37,0,0">
                         <TextBlock
                             FontSize="14"
                             Foreground="#BABCC7"
@@ -158,8 +117,8 @@
 
                 <StackPanel
                     Grid.Row="1"
-                    IsEnabled="{Binding IsEnabledVpn}"
-                    Margin="0,20,0,0">
+                    Margin="0,20,0,0"
+                    IsEnabled="{Binding IsEnabledVpn}">
 
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -171,7 +130,7 @@
                         </Style>
                     </StackPanel.Style>
 
-                    
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -197,6 +156,48 @@
                                         FontSize="13"
                                         Foreground="#FF7201"
                                         Text="{Binding GermanyPing}" />
+
+                                    <TextBlock
+                                        Margin="5,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="ping" />
+                                </StackPanel>
+
+                                <ToggleButton
+                                    Width="20"
+                                    Margin="15,0,0,0"
+                                    Style="{StaticResource FavouriteButton}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Margin="0,20,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button
+                            Grid.Column="0"
+                            Command="{Binding NavigateToHomeFranceCommand}"
+                            Content="Франция"
+                            Style="{StaticResource VpnPremiumButton}"
+                            Tag="{StaticResource FranceIcon}" />
+
+                        <Grid Grid.Column="1">
+                            <StackPanel
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="13"
+                                        Foreground="#FF7201"
+                                        Text="{Binding FrancePing}" />
 
                                     <TextBlock
                                         Margin="5,0,0,0"

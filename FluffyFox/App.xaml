@@ -9,7 +9,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Assets/Icons/Icons.xaml" />
                 <ResourceDictionary Source="Assets/Styles/Styles.xaml" />
-                <ResourceDictionary Source="Assets/Animations/Animations.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Storyboard x:Key="MyAnimation">

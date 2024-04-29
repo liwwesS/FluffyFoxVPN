@@ -15,7 +15,7 @@ public class PingUtility
     
     public const string UsernameVpnBook = "vpnbook";
     public const string UsernameVpn4You = "freevpn4you";
-    public const string PasswordVpnBook = "emw79zs";
+    public const string PasswordVpnBook = "n8rfzew";
     public const string PasswordVpn4You = "8729591";
     
     public event EventHandler<int> PingUpdated;

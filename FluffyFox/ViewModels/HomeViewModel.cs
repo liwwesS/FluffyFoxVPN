@@ -16,7 +16,7 @@ namespace FluffyFox.ViewModels
 		public Visibility CanadaGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility FranceGridVisibility { get; private set; } = Visibility.Collapsed;
 
-		public bool IsVpnConnected { get; set; } = false;
+		private bool IsVpnConnected { get; set; } = false;
 
 		public int GermanyPing { get; private set; }
 		public int FrancePing { get; private set; }

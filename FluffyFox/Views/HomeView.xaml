@@ -383,7 +383,6 @@
 
                         <ToggleButton
                             Command="{Binding ConnectToVpnCommand}"
-                            IsChecked="{Binding IsVpnConnected}"
                             Style="{StaticResource ConnectButton}">
                             <ToggleButton.Triggers>
                                 <EventTrigger RoutedEvent="ToggleButton.Checked">

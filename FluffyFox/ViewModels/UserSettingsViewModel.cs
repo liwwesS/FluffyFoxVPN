@@ -19,7 +19,7 @@ namespace FluffyFox.ViewModels
 	    private IUserRepository UserRepository { get; set; }
 	    
 	    public string Email { get; set; }
-	    public string Key { get; set; }
+	    private string Key { get; set; }
 		public string ErrorMessage { get; set; }
 		public string OkMessage { get; set; }
 	    public bool IsEditable { get; set; }
@@ -64,12 +64,10 @@ namespace FluffyFox.ViewModels
 					ErrorMessageVisibility = Visibility.Visible;
 					return;
 				}
-				else
-				{
-					ErrorMessage = "Поле ввода электронной почты не должно быть пустым.";
-					ErrorMessageVisibility = Visibility.Visible;
-					return;
-				}
+				
+				ErrorMessage = "Поле ввода электронной почты не должно быть пустым.";
+				ErrorMessageVisibility = Visibility.Visible;
+				return;
 			}
 
 			if (!IsValidEmail(Email))
@@ -122,7 +120,7 @@ namespace FluffyFox.ViewModels
 			OkMessageVisibility = Visibility.Visible;
 		}
 
-		private bool IsValidEmail(string email)
+		private static bool IsValidEmail(string email)
 		{
 			return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 		}

@@ -16,12 +16,20 @@ namespace FluffyFox.Repositories
 		public async Task<UsersModel> GetUserByKeyAsync(string key)
 		{
 			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Key == key);
+			if (user == null)
+			{
+				return null;
+			}
 			return UsersModel.ToUserModelMap(user);
 		}
 		
 		public async Task<UsersModel> GetUserByEmailAsync(string email)
 		{
 			var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+			if (user == null)
+			{
+				return null; 
+			}
 			return UsersModel.ToUserModelMap(user);
 		}
 

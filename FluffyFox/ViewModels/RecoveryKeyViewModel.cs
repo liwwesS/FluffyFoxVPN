@@ -12,13 +12,18 @@ namespace FluffyFox.ViewModels
 {
     public class RecoveryKeyViewModel : ViewModelBase
     {
-	    public UserSession UserSession { get; set; }
+	    private UserSession UserSession { get; set; }
 
-	    public INavigationService Navigation { get; set; }
+	    private INavigationService Navigation { get; set; }
 
-	    public IUserRepository UserRepository { get; set; }
+	    private IUserRepository UserRepository { get; set; }
 	    
 		public string Email { get; set; }
+		public string ErrorMessage { get; set; }
+		public string OkMessage { get; set; }
+		
+		public Visibility ErrorMessageVisibility { get; private set; } = Visibility.Collapsed;
+		public Visibility OkMessageVisibility { get; private set; } = Visibility.Collapsed;
 
 		public RelayCommand NavigateToLoginCommand { get; }
 
@@ -29,19 +34,40 @@ namespace FluffyFox.ViewModels
 			Navigation = navigationService;
 			UserSession = userSession;
 			UserRepository = userRepository;
-
+			
 			NavigateToLoginCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginKeyViewModel>(); }, o => true);
 			SendKeyCommand = new RelayCommand(OnSendEmailCommand);
 		}
 
 		private async void OnSendEmailCommand(object parameter)
 		{
+			ErrorMessageVisibility = Visibility.Collapsed;
+			OkMessageVisibility = Visibility.Collapsed;
 
-			UserSession.CurrentUser = await UserRepository.GetUserByEmailAsync(Email);
-			var user = UserSession.CurrentUser;
+			var currentUser = await UserRepository.GetUserByEmailAsync(Email);
 
-			if (user == null) return;
-			var userKey = user.Key;
+			if (currentUser == null)
+			{
+				if (string.IsNullOrWhiteSpace(Email))
+				{
+					ErrorMessage = "Поле ввода электронной почты не должно быть пустым.";
+					ErrorMessageVisibility = Visibility.Visible;
+					return;
+				}
+
+				if (!IsValidEmail(Email))
+				{
+					ErrorMessage = "Некорректный формат электронной почты.";
+					ErrorMessageVisibility = Visibility.Visible;
+					return;
+				}
+
+				ErrorMessage = "Пользователя с таким адресом электронной почты не существует.";
+				ErrorMessageVisibility = Visibility.Visible;
+				return;
+			}
+	
+			var userKey = currentUser.Key;
 			var formattedKey = KeyFormat.FormatString(userKey);
 				
 			SendEmail(formattedKey);
@@ -76,7 +102,13 @@ namespace FluffyFox.ViewModels
 
 			smtpClient.Send(message);
 
-			MessageBox.Show("Ключ успешно отправлен на почту!");
+			OkMessage = "Ключ успешно отправлен на почту!";
+			OkMessageVisibility = Visibility.Visible;
+		}
+
+		private static bool IsValidEmail(string email)
+		{
+			return System.Text.RegularExpressions.Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
 		}
 	}
 }

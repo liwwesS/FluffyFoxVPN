@@ -81,18 +81,36 @@
                         CaretBrush="#fcfefe"
                         FontSize="14"
                         Foreground="#BABCC7"
-                        Text="{Binding Email}"
                         Style="{StaticResource MaterialDesignTextBox}"
+                        Text="{Binding Email}"
                         TextAlignment="Left" />
                 </Grid>
             </Border>
 
             <Button
                 Width="344"
-                Margin="0,18,0,0"
-                Content="Отправить"
+                Margin="0,50,0,0"
                 Command="{Binding SendKeyCommand}"
+                Content="Отправить"
                 Style="{StaticResource RoundOrangeButton}" />
         </StackPanel>
+
+        <TextBlock
+            Height="30"
+            Margin="25,0,25,90"
+            FontSize="13"
+            Foreground="MediumSeaGreen"
+            Text="{Binding OkMessage}"
+            TextWrapping="Wrap"
+            Visibility="{Binding OkMessageVisibility}" />
+
+        <TextBlock
+            Height="30"
+            Margin="25,0,25,90"
+            FontSize="13"
+            Foreground="IndianRed"
+            Text="{Binding ErrorMessage}"
+            TextWrapping="Wrap"
+            Visibility="{Binding ErrorMessageVisibility}" />
     </Grid>
 </UserControl>

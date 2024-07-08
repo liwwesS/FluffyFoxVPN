@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Net;
+using System.Windows;
 using System.Windows.Input;
 using FluffyFox.Commands;
 using FluffyFox.Helpers;
@@ -7,11 +8,10 @@ using FluffyFox.Services;
 
 namespace FluffyFox.ViewModels
 {
-	public class HomeViewModel : ViewModelBase
+    public class HomeViewModel : ViewModelBase
 	{
 		private readonly Dictionary<string, PingUtility> _pingUtilities = new();
-
-		public Visibility PolandGridVisibility { get; private set; } = Visibility.Collapsed;
+        public Visibility PolandGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility GermanyGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility CanadaGridVisibility { get; private set; } = Visibility.Collapsed;
 		public Visibility FranceGridVisibility { get; private set; } = Visibility.Collapsed;
@@ -71,7 +71,7 @@ namespace FluffyFox.ViewModels
 			CheckIP();
 			IP = GetIP();
 
-			ConnectToVpnCommand = new RelayCommand(OnConnectToVpn);
+			ConnectToVpnCommand = new RelayCommand(async o => await OnConnectToVpn());
 		}
 
 		private void UpdateGridVisibility()
@@ -103,23 +103,16 @@ namespace FluffyFox.ViewModels
 
 		private void CheckIP()
 		{
-			if (IsCheckedVpn)
-			{
-				IPGridVisibility = Visibility.Visible;
-			}
-			else
-			{
-				IPGridVisibility = Visibility.Collapsed;
-			}
-		}
+            IPGridVisibility = IsCheckedVpn ? Visibility.Visible : Visibility.Collapsed;
+        }
 
 		private static string GetIP()
 		{
-			string host = System.Net.Dns.GetHostName();
-			string ip = System.Net.Dns.GetHostByName(host).AddressList[0].ToString();
+            var host = Dns.GetHostName();
+            var ip = Dns.GetHostEntry(host).AddressList.FirstOrDefault()?.ToString();
 
-			return ip;
-		}
+            return ip ?? "Unknown";
+        }
 
 		private void InitializePingUtility(string host, Action<int> setPingValue)
 		{
@@ -128,45 +121,42 @@ namespace FluffyFox.ViewModels
 			_pingUtilities.Add(host, pingUtility);
 			pingUtility.Start();
 		}
-		
-		private async void OnConnectToVpn(object parameter)
+
+        private async Task OnConnectToVpn()
 		{
-			var region = UserSession.Region;
-			const string userName = PingUtility.UsernameVpnBook;
-			const string userPassword = PingUtility.PasswordVpnBook;
+            try
+            {
+                var region = UserSession.Region;
+                const string userName = PingUtility.UsernameVpnBook;
+                const string userPassword = PingUtility.PasswordVpnBook;
 
-			switch (region)
+                region = region switch
+                {
+                    "PL" => PingUtility.Poland,
+                    "DE" => PingUtility.Germany,
+                    "CA" => PingUtility.Canada,
+                    "FR" => PingUtility.France,
+                    _ => PingUtility.Poland,
+                };
+                if (IsCheckedVpn)
+                {
+                    UserSession.IsVpnConnect = true;
+                    await VpnManager.Connect(region, userName, userPassword);
+                    IPGridVisibility = Visibility.Visible;
+                    IP = GetIP();
+                }
+                else
+                {
+                    UserSession.IsVpnConnect = false;
+                    IPGridVisibility = Visibility.Collapsed;
+                    await VpnManager.Disconnect();
+                }
+            }
+			catch (Exception ex)
 			{
-				case "PL":
-					region = PingUtility.Poland;
-					break;
-				case "DE":
-					region = PingUtility.Germany;
-					break;
-				case "CA":
-					region = PingUtility.Canada;
-					break;
-				case "FR":
-					region = PingUtility.France;
-					break;
-				default:
-					region = PingUtility.Poland;
-					break;
-			}
+				MessageBox.Show(ex.Message);
+            }
 
-			if (IsCheckedVpn)
-			{
-				UserSession.IsVpnConnect = true;
-				await VpnManager.Connect(region, userName, userPassword);
-				IPGridVisibility = Visibility.Visible;
-				IP = GetIP();
-			}
-			else
-			{
-				UserSession.IsVpnConnect = false;
-				IPGridVisibility = Visibility.Collapsed;
-				await VpnManager.Disconnect();
-			}
-		}
+        }
 	}
 }

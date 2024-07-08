@@ -14,32 +14,28 @@ public class PingUtility
     public const string Poland = "PL134.vpnbook.com";
     
     public const string UsernameVpnBook = "vpnbook";
-    public const string PasswordVpnBook = "n8rfzew";
+    public const string PasswordVpnBook = "dnx97sa";
     
     public event EventHandler<int> PingUpdated;
 
     public PingUtility(string hostNameOrAddress)
     {
         _hostNameOrAddress = hostNameOrAddress;
-        _timer = new Timer();
-        _timer.Interval = TimeSpan.FromSeconds(15).TotalMilliseconds;
-        _timer.AutoReset = true;
-        _timer.Elapsed += async (sender, e) => await UpdatePing();
+        _timer = new Timer
+        {
+            Interval = TimeSpan.FromSeconds(15).TotalMilliseconds,
+            AutoReset = true
+        };
+        _timer.Elapsed += async (sender, e) => await UpdatePingAsync();
 
-        _ = UpdatePing();
+        _ = UpdatePingAsync();
     }
 
-    public void Start()
-    {
-        _timer.Start();
-    }
+    public void Start() => _timer.Start();
 
-    public void Stop()
-    {
-        _timer.Stop();
-    }
+    public void Stop() => _timer.Stop();
 
-    private async Task UpdatePing()
+    private async Task UpdatePingAsync()
     {
         var ping = await GetPingAsync(_hostNameOrAddress);
         PingUpdated?.Invoke(this, ping);

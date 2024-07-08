@@ -6,22 +6,33 @@ namespace FluffyFox.Helpers;
 
 public class VpnManager
 {
-    private static string FolderPath => string.Concat(Directory.GetCurrentDirectory(),
-        "\\VPN");
+    private static string FolderPath => string.Concat(Directory.GetCurrentDirectory(),"\\VPN");
+
     public static async Task Connect(string vpnName, string username, string password)
     {
         if (!Directory.Exists(FolderPath))
             Directory.CreateDirectory(FolderPath);
-        
-        var sb = new StringBuilder();
-        sb.AppendLine("[VPN]");
-        sb.AppendLine("MEDIA=rastapi");
-        sb.AppendLine("Port=VPN2-0");
-        sb.AppendLine("Device=WAN Miniport (IKEv2)");
-        sb.AppendLine("DEVICE=vpn");
-        sb.AppendLine("PhoneNumber=" + vpnName);
-        
-        await File.WriteAllTextAsync(FolderPath + "\\VpnConnection.pbk", sb.ToString());
+
+        var runningProcess = Process.GetProcessesByName("rasdial").ToList();
+        if (runningProcess.Count != 0)
+        {
+            foreach (var item in runningProcess)
+            {
+                item.Kill();
+                await item.WaitForExitAsync();
+            }
+        }
+
+        var pbkContent = new StringBuilder()
+            .AppendLine("[VPN]")
+            .AppendLine("MEDIA=rastapi")
+            .AppendLine("Port=VPN2-0")
+            .AppendLine("Device=WAN Miniport (IKEv2)")
+            .AppendLine("DEVICE=vpn")
+            .AppendLine("PhoneNumber=" + vpnName)
+            .ToString();
+
+        await File.WriteAllTextAsync(FolderPath + "\\VpnConnection.pbk", pbkContent.ToString());
         
         var process = new Process();
         var startInfo = new ProcessStartInfo
@@ -40,6 +51,16 @@ public class VpnManager
 
     public static async Task Disconnect()
     {
+        var runningProcess = Process.GetProcessesByName("rasdial").ToList();
+        if (runningProcess.Count != 0)
+        {
+            foreach (var item in runningProcess)
+            {
+                item.Kill();
+                await item.WaitForExitAsync();
+            }
+        }
+
         using var process = new Process();
         var startInfo = new ProcessStartInfo
         {

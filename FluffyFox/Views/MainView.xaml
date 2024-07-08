@@ -12,6 +12,7 @@
     d:DataContext="{d:DesignInstance Type=vm:MainViewModel}"
     AllowsTransparency="True"
     FontFamily="/Assets/Fonts/#Inter Regular"
+    ResizeMode="NoResize"
     WindowStartupLocation="CenterScreen"
     WindowState="Normal"
     WindowStyle="None"

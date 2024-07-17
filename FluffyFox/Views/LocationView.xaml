@@ -51,6 +51,55 @@
                             Text="Локации" />
                     </StackPanel>
 
+                    <StackPanel Margin="0,37,0,0" Visibility="Collapsed">
+                        <TextBlock
+        FontSize="14"
+        Foreground="#BABCC7"
+        Text="Избранные регионы" />
+
+                        <Grid Margin="0,20,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <Button
+            Grid.Column="0"
+            Command="{Binding NavigateToHomePolandCommand}"
+            Content="Польша"
+            Style="{StaticResource VpnPremiumButton}"
+            Tag="{StaticResource PolandIcon}" />
+
+                            <Grid Grid.Column="1">
+                                <StackPanel
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Orientation="Horizontal">
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Foreground="#FF7201"
+                        Text="{Binding PolandPing}" />
+
+                                        <TextBlock
+                        Margin="5,0,0,0"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Foreground="#FF7201"
+                        Text="ping" />
+                                    </StackPanel>
+
+                                    <ToggleButton
+                    Width="20"
+                    Margin="15,0,0,0"
+                    Style="{StaticResource FavouriteButton}" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </StackPanel>
+
                     <StackPanel Margin="0,37,0,0">
                         <TextBlock
                             FontSize="14"

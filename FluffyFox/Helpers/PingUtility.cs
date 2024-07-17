@@ -8,11 +8,14 @@ public class PingUtility
     private readonly Timer _timer;
     private readonly string _hostNameOrAddress;
 
-    public const string Germany = "DE20.vpnbook.com";
-    public const string France = "FR200.vpnbook.com";
-    public const string Canada = "CA149.vpnbook.com";
-    public const string Poland = "PL134.vpnbook.com";
-    
+    public static readonly Dictionary<string, string> RegionHosts = new()
+    {
+        { "DE", "DE20.vpnbook.com" },
+        { "FR", "FR200.vpnbook.com" },
+        { "CA", "CA149.vpnbook.com" },
+        { "PL", "PL134.vpnbook.com" }
+    };
+
     public const string UsernameVpnBook = "vpnbook";
     public const string PasswordVpnBook = "dnx97sa";
     
@@ -57,5 +60,10 @@ public class PingUtility
         }
 
         return -1; 
+    }
+
+    public static string? GetHostByRegion(string region)
+    {
+        return RegionHosts.TryGetValue(region, out var host) ? host : null;
     }
 }

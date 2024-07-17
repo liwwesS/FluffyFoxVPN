@@ -179,225 +179,39 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0" Margin="20,20,25,0">
-                    <Grid Visibility="{Binding PolandGridVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="42"
-                                Height="42"
-                                Source="{StaticResource PolandIcon}" />
-                        </Grid>
+                    <ItemsControl ItemsSource="{Binding Regions}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Visibility="{Binding Visibility}">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="52" />
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
 
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="16"
-                                    Foreground="#BABCC7"
-                                    Text="Poland" />
-                            </StackPanel>
-                        </Grid>
+                                    <Grid Grid.Column="0">
+                                        <Image Width="48" Height="48" Source="{DynamicResource {Binding Icon}}" />
+                                    </Grid>
 
-                        <Rectangle
-                            Grid.Column="2"
-                            Width="1"
-                            Height="50"
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch"
-                            Fill="#BABCC7"
-                            Opacity="0.6" />
+                                    <Grid Grid.Column="1" Margin="10,0,0,0">
+                                        <StackPanel VerticalAlignment="Center">
+                                            <TextBlock FontSize="16" Foreground="#BABCC7" Text="{Binding Name}" />
+                                        </StackPanel>
+                                    </Grid>
 
-                        <Grid
-                            Grid.Column="2"
-                            Width="50"
-                            HorizontalAlignment="Right">
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                                    FontSize="18"
-                                    Foreground="#FF7201"
-                                    Text="{Binding PolandPing}" />
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Medium"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="PING" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
+                                    <Rectangle Grid.Column="2" Width="1" Height="50" Margin="30,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Stretch" Fill="#BABCC7" Opacity="0.6" />
 
-                    <Grid Visibility="{Binding GermanyGridVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="48"
-                                Height="48"
-                                Source="{StaticResource GermanyIcon}" />
-                        </Grid>
-
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="16"
-                                    Foreground="#BABCC7"
-                                    Text="Германия" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Rectangle
-                            Grid.Column="2"
-                            Width="1"
-                            Height="50"
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch"
-                            Fill="#BABCC7"
-                            Opacity="0.6" />
-
-                        <Grid
-                            Grid.Column="2"
-                            Width="50"
-                            HorizontalAlignment="Right">
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                                    FontSize="18"
-                                    Foreground="#FF7201"
-                                    Text="{Binding GermanyPing}" />
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Medium"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="PING" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-
-                    <Grid Visibility="{Binding CanadaGridVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="48"
-                                Height="48"
-                                Source="{StaticResource CanadaIcon}" />
-                        </Grid>
-
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="16"
-                                    Foreground="#BABCC7"
-                                    Text="Канада" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Rectangle
-                            Grid.Column="2"
-                            Width="1"
-                            Height="50"
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch"
-                            Fill="#BABCC7"
-                            Opacity="0.6" />
-
-                        <Grid
-                            Grid.Column="2"
-                            Width="50"
-                            HorizontalAlignment="Right">
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                                    FontSize="18"
-                                    Foreground="#FF7201"
-                                    Text="{Binding CanadaPing}" />
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Medium"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="PING" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
-
-                    <Grid Visibility="{Binding FranceGridVisibility}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="52" />
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-
-                        <Grid Grid.Column="0">
-                            <Image
-                                Width="48"
-                                Height="48"
-                                Source="{StaticResource FranceIcon}" />
-                        </Grid>
-
-                        <Grid Grid.Column="1" Margin="10,0,0,0">
-                            <StackPanel VerticalAlignment="Center">
-                                <TextBlock
-                                    FontSize="16"
-                                    Foreground="#BABCC7"
-                                    Text="Франция" />
-                            </StackPanel>
-                        </Grid>
-
-                        <Rectangle
-                            Grid.Column="2"
-                            Width="1"
-                            Height="50"
-                            Margin="30,0,0,0"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Stretch"
-                            Fill="#BABCC7"
-                            Opacity="0.6" />
-
-                        <Grid
-                            Grid.Column="2"
-                            Width="50"
-                            HorizontalAlignment="Right">
-                            <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Semi Bold"
-                                    FontSize="18"
-                                    Foreground="#FF7201"
-                                    Text="{Binding FrancePing}" />
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    FontFamily="/Assets/Fonts/#Inter Medium"
-                                    FontSize="13"
-                                    Foreground="#BABCC7"
-                                    Opacity="0.7"
-                                    Text="PING" />
-                            </StackPanel>
-                        </Grid>
-                    </Grid>
+                                    <Grid Grid.Column="2" Width="50" HorizontalAlignment="Right">
+                                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center">
+                                            <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/Fonts/#Inter Semi Bold" FontSize="18" Foreground="#FF7201" Text="{Binding Ping}" />
+                                            <TextBlock HorizontalAlignment="Center" FontFamily="/Assets/Fonts/#Inter Medium" FontSize="13" Foreground="#BABCC7" Opacity="0.7" Text="PING" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
                 </Grid>
 
                 <Grid Grid.Row="1">

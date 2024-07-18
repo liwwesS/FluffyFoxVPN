@@ -1,6 +1,4 @@
-﻿using System.Windows;
-
-namespace FluffyFox.ViewModels
+﻿namespace FluffyFox.ViewModels
 {
     public class RegionViewModel : ViewModelBase
     {
@@ -8,7 +6,9 @@ namespace FluffyFox.ViewModels
         public string Icon { get; set; }
         public string Code { get; set; }
 
+        public bool? IsFavourite { get; set; }
+        public bool IsPremium { get; set; }
+
         public int Ping { get; set; }
-        public Visibility Visibility { get; set; }
     }
 }

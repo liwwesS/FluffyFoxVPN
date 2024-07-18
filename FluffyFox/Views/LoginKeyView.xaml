@@ -81,7 +81,7 @@
                         CaretBrush="#fcfefe"
                         FontSize="14"
                         Foreground="#BABCC7"
-                        MaxLength="16"
+                        MaxLength="19"
                         Style="{StaticResource MaterialDesignTextBox}"
                         Text="{Binding EnteredKey}"
                         TextAlignment="Left" />

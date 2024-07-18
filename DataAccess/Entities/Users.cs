@@ -35,5 +35,9 @@ namespace DataAccess.Entities
 		[Column("email")]
 		[MaxLength(126)]
 		public string? Email { get; set; }
-	}
+
+		[Column("favourite_regions")]
+		[MaxLength(2)]
+        public string? FavouriteRegions { get; set; }
+    }
 }

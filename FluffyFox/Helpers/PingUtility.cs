@@ -8,14 +8,6 @@ public class PingUtility
     private readonly Timer _timer;
     private readonly string _hostNameOrAddress;
 
-    public static readonly Dictionary<string, string> RegionHosts = new()
-    {
-        { "DE", "DE20.vpnbook.com" },
-        { "FR", "FR200.vpnbook.com" },
-        { "CA", "CA149.vpnbook.com" },
-        { "PL", "PL134.vpnbook.com" }
-    };
-
     public const string UsernameVpnBook = "vpnbook";
     public const string PasswordVpnBook = "dnx97sa";
     
@@ -23,7 +15,7 @@ public class PingUtility
 
     public PingUtility(string hostNameOrAddress)
     {
-        _hostNameOrAddress = hostNameOrAddress;
+        _hostNameOrAddress = hostNameOrAddress ?? throw new ArgumentNullException(nameof(hostNameOrAddress)); ;
         _timer = new Timer
         {
             Interval = TimeSpan.FromSeconds(15).TotalMilliseconds,
@@ -62,8 +54,21 @@ public class PingUtility
         return -1; 
     }
 
-    public static string? GetHostByRegion(string region)
+    public static string GetHostByRegion(string region)
     {
-        return RegionHosts.TryGetValue(region, out var host) ? host : null;
+        var regionHosts = new Dictionary<string, string>
+        {
+            { "PL", "PL140.vpnbook.com" },
+            { "DE", "DE20.vpnbook.com" },
+            { "FR", "FR200.vpnbook.com" },
+            { "CA", "CA149.vpnbook.com" }
+        };
+
+        if (!regionHosts.TryGetValue(region, out var host))
+        {
+            throw new ArgumentException($"Host not found for region: {region}");
+        }
+
+        return host;
     }
 }

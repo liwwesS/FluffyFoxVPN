@@ -46,7 +46,14 @@ namespace DataAccess.Models
 			set => OnPropertyChanged(ref _email, value);
 		}
 
-		public static UsersModel ToUserModelMap(Users user)
+        private string? _favouriteRegions;
+        public string? FavouriteRegions
+        {
+            get => _favouriteRegions;
+            set => OnPropertyChanged(ref _favouriteRegions, value);
+        }
+
+        public static UsersModel ToUserModelMap(Users user)
 		{
 			return new UsersModel()
 			{
@@ -56,7 +63,8 @@ namespace DataAccess.Models
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
 				TariffId = user.TariffId,
-				Email = user.Email ?? null
+				Email = user.Email ?? null,
+				FavouriteRegions = user.FavouriteRegions ?? null
 			};
 		}
 		
@@ -70,7 +78,8 @@ namespace DataAccess.Models
 				DateOfRegistration = user.DateOfRegistration,
 				Token = user.Token ?? null,
 				TariffId = user.TariffId,
-				Email = user.Email ?? null
+				Email = user.Email ?? null,
+				FavouriteRegions = user.FavouriteRegions ?? null
 			};
 		}
 	}

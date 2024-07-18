@@ -3,64 +3,80 @@ using FluffyFox.Helpers;
 using FluffyFox.Repositories;
 using FluffyFox.Services;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace FluffyFox.ViewModels
 {
-    public class LocationViewModel : ViewModelBase
+    public class LocationViewModel : VpnViewModel
 	{
-		private UserSession UserSession { get; set; }
-		private INavigationService Navigation { get; set; }
-		public IUserRepository UserRepository { get; set; }
+        private readonly IUserRepository _userRepository;
 
-        private readonly Dictionary<string, PingUtility> _pingUtilities = [];
-        private readonly Dictionary<string, int> _regionPings = [];
-
-        public bool IsEnabledVpn { get; set; }
-		public int GermanyPing { get; private set; }
-		public int FrancePing { get; private set; }
-		public int CanadaPing { get; private set; }
-		public int PolandPing { get; private set; }
-
-        public ObservableCollection<Region> AllRegions { get; set; }
-        public ObservableCollection<Region> FavouriteRegions { get; set; }
+        public ObservableCollection<RegionViewModel> FavouriteRegions { get; set; } = [];
 
         public RelayCommand NavigateToHomeCommand { get; }
-		public RelayCommand NavigateToHomePolandCommand { get; private set; }
-		public RelayCommand NavigateToHomeGermanyCommand { get; private set; }
-		public RelayCommand NavigateToHomeCanadaCommand { get; private set; }
-		public RelayCommand NavigateToHomeFranceCommand { get; private set; }
         public RelayCommand NavigateToHomeRegionCommand { get; private set; }
         public RelayCommand ToggleFavouriteCommand { get; }
 
+        public Visibility FavouriteRegionsVisibility { get; set; }
+        public Visibility FreeRegionsVisibility { get; set; }
+        public Visibility PremiumRegionsVisibility { get; set; }
+
+        public bool IsEnabledVpn { get; set; }
+
         public LocationViewModel(INavigationService navigationService, UserSession userSession, IUserRepository userRepository)
-		{
-			Navigation = navigationService;
-			UserSession = userSession;
-			UserRepository = userRepository;
+            : base(navigationService, userSession, userRepository)
+        {
+            _userRepository = userRepository;
 
-            AllRegions =
-            [
-                new Region { ShortName = "PL", IsFavourite = false },
-				new Region { ShortName = "DE", IsFavourite = false },
-				new Region { ShortName = "FR", IsFavourite = false },
-				new Region { ShortName = "CA", IsFavourite = false }
-			];
-
-            FavouriteRegions = [];
-
-            InitializePingUtilities();
             CheckUserTariff();
-			
-			NavigateToHomeCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, o => true);
+            LoadFavouriteRegions();
+            UpdateRegionsVisibility();
+
+            NavigateToHomeCommand = new RelayCommand(o => Navigation.NavigateTo<HomeViewModel>(), o => true);
             NavigateToHomeRegionCommand = new RelayCommand(NavigateToHomeRegion, o => true);
             ToggleFavouriteCommand = new RelayCommand(ToggleFavourite);
         }
 
+        private void LoadFavouriteRegions()
+        {
+            var user = UserSession.CurrentUser;
+            var favouriteRegionCodes = user.FavouriteRegions?.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+            if (favouriteRegionCodes != null)
+            {
+                foreach (var regionCode in favouriteRegionCodes)
+                {
+                    var region = Regions.FirstOrDefault(r => r.Code == regionCode);
+                    if (region != null)
+                    {
+                        region.IsFavourite = true;
+                        FavouriteRegions.Add(region);
+
+                        if (region.IsPremium)
+                        {
+                            PremiumRegions.Remove(region);
+                        }
+                        else
+                        {
+                            FreeRegions.Remove(region);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void UpdateRegionsVisibility()
+        {
+            FavouriteRegionsVisibility = FavouriteRegions.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            PremiumRegionsVisibility = PremiumRegions.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+            FreeRegionsVisibility = FreeRegions.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
         private void NavigateToHomeRegion(object parameter)
         {
-			if (parameter is Region region)
+			if (parameter is RegionViewModel region)
 			{
-                UserSession.Region = region.ShortName;
+                UserSession.Region = region.Code;
                 Navigation.NavigateTo<HomeViewModel>();
             } 
         }
@@ -71,37 +87,49 @@ namespace FluffyFox.ViewModels
 			IsEnabledVpn = user.TariffId != 20;
 		}
 
-        private void InitializePingUtilities()
-        {
-            foreach (var region in AllRegions)
-            {
-                InitializePingUtility(region.ShortName, ping => _regionPings[region.ShortName] = ping);
-            }
-        }
-
-        private void InitializePingUtility(string region, Action<int> setPingValue)
-		{
-            var host = PingUtility.GetHostByRegion(region);
-            var pingUtility = new PingUtility(host);
-			pingUtility.PingUpdated += (_, ping) => setPingValue(ping);
-            _pingUtilities[region] = pingUtility;
-            pingUtility.Start();
-		}
-
         private void ToggleFavourite(object parameter)
         {
-			if (parameter is Region region)
+			if (parameter is RegionViewModel region)
 			{
-                region.IsFavourite = !region.IsFavourite;
+                var user = UserSession.CurrentUser;
+                var favouriteRegionCodes = user.FavouriteRegions?.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList() ?? [];
 
-                if (region.IsFavourite)
+                if (favouriteRegionCodes.Contains(region.Code))
                 {
-                    FavouriteRegions.Add(region);
+                    favouriteRegionCodes.Remove(region.Code);
+                    user.FavouriteRegions = string.Join(',', favouriteRegionCodes);
+                    FavouriteRegions.Remove(region);
+
+                    if (region.IsPremium)
+                    {
+                        PremiumRegions.Add(region);
+                    }
+                    else
+                    {
+                        FreeRegions.Add(region);
+                    }
+
+                    region.IsFavourite = false;
                 }
                 else
                 {
-                    FavouriteRegions.Remove(region);
+                    favouriteRegionCodes.Add(region.Code);
+                    user.FavouriteRegions = string.Join(',', favouriteRegionCodes);
+                    FavouriteRegions.Add(region);
+                    region.IsFavourite = true;
+
+                    if (region.IsPremium)
+                    {
+                        PremiumRegions.Remove(region);
+                    }
+                    else
+                    {
+                        FreeRegions.Remove(region);
+                    }
                 }
+
+                _userRepository.UpdateUserAsync(user);
+                UpdateRegionsVisibility();
             }
         }
     }

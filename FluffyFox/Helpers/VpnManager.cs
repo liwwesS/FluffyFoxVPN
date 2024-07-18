@@ -13,27 +13,16 @@ public class VpnManager
         if (!Directory.Exists(FolderPath))
             Directory.CreateDirectory(FolderPath);
 
-        var runningProcess = Process.GetProcessesByName("rasdial").ToList();
-        if (runningProcess.Count != 0)
-        {
-            foreach (var item in runningProcess)
-            {
-                item.Kill();
-                await item.WaitForExitAsync();
-            }
-        }
+        var sb = new StringBuilder();
+        sb.AppendLine("[VPN]");
+        sb.AppendLine("MEDIA=rastapi");
+        sb.AppendLine("Port=VPN2-0");
+        sb.AppendLine("Device=WAN Miniport (IKEv2)");
+        sb.AppendLine("DEVICE=vpn");
+        sb.AppendLine("PhoneNumber=" + vpnName);
 
-        var pbkContent = new StringBuilder()
-            .AppendLine("[VPN]")
-            .AppendLine("MEDIA=rastapi")
-            .AppendLine("Port=VPN2-0")
-            .AppendLine("Device=WAN Miniport (IKEv2)")
-            .AppendLine("DEVICE=vpn")
-            .AppendLine("PhoneNumber=" + vpnName)
-            .ToString();
+        await File.WriteAllTextAsync(FolderPath + "\\VpnConnection.pbk", sb.ToString());
 
-        await File.WriteAllTextAsync(FolderPath + "\\VpnConnection.pbk", pbkContent.ToString());
-        
         var process = new Process();
         var startInfo = new ProcessStartInfo
         {
@@ -44,23 +33,13 @@ public class VpnManager
             CreateNoWindow = true
         };
         process.StartInfo = startInfo;
-        
+
         await Task.Run(() => process.Start());
         await process.WaitForExitAsync();
     }
 
     public static async Task Disconnect()
     {
-        var runningProcess = Process.GetProcessesByName("rasdial").ToList();
-        if (runningProcess.Count != 0)
-        {
-            foreach (var item in runningProcess)
-            {
-                item.Kill();
-                await item.WaitForExitAsync();
-            }
-        }
-
         using var process = new Process();
         var startInfo = new ProcessStartInfo
         {

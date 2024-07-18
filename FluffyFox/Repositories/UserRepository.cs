@@ -43,6 +43,7 @@ namespace FluffyFox.Repositories
 				existingUser.DateOfRegistration = user.DateOfRegistration;
 				existingUser.Token = user.Token;
 				existingUser.Email = user.Email;
+				existingUser.FavouriteRegions = user.FavouriteRegions;
 
 				await _dbContext.SaveChangesAsync();
 			}
